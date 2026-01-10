@@ -81,6 +81,60 @@ const POLITICIAN_APPEARANCES: Record<string, string> = {
   'Angus King': 'older man, 80 years old, white mustache, Maine outdoorsman look, independent spirit',
 };
 
+// CEO appearances for politician-CEO interaction scenes
+const CEO_APPEARANCES: Record<string, { name: string; appearance: string; company: string }> = {
+  // Big Tech
+  'NVDA': { name: 'Jensen Huang', appearance: 'Asian American man, 61 years old, spiky gray-black hair, signature black leather jacket, energetic showman demeanor, NVIDIA CEO', company: 'NVIDIA' },
+  'TSLA': { name: 'Elon Musk', appearance: 'tall man, 53 years old, brown hair with some gray, sometimes awkward demeanor, eccentric billionaire style, Tesla/SpaceX CEO', company: 'Tesla' },
+  'AAPL': { name: 'Tim Cook', appearance: 'older man, 64 years old, silver-gray hair, glasses, calm composed demeanor, fitness watch on wrist, Apple CEO', company: 'Apple' },
+  'MSFT': { name: 'Satya Nadella', appearance: 'Indian American man, 57 years old, bald, glasses, soft-spoken intellectual demeanor, Microsoft CEO', company: 'Microsoft' },
+  'GOOGL': { name: 'Sundar Pichai', appearance: 'Indian American man, 52 years old, dark hair graying, calm measured demeanor, Google/Alphabet CEO', company: 'Google' },
+  'GOOG': { name: 'Sundar Pichai', appearance: 'Indian American man, 52 years old, dark hair graying, calm measured demeanor, Google/Alphabet CEO', company: 'Google' },
+  'AMZN': { name: 'Andy Jassy', appearance: 'middle-aged man, 56 years old, bald, intense focused expression, casual tech exec style, Amazon CEO', company: 'Amazon' },
+  'META': { name: 'Mark Zuckerberg', appearance: 'younger man, 40 years old, curly brown hair, robotic awkward demeanor, casual gray t-shirt, Meta CEO', company: 'Meta' },
+
+  // Finance
+  'JPM': { name: 'Jamie Dimon', appearance: 'older man, 68 years old, silver hair, commanding Wall Street presence, authoritative banker demeanor, JPMorgan CEO', company: 'JPMorgan' },
+  'GS': { name: 'David Solomon', appearance: 'middle-aged man, 62 years old, bald, DJ hobby known, Goldman Sachs CEO', company: 'Goldman Sachs' },
+  'BRK.A': { name: 'Warren Buffett', appearance: 'elderly man, 94 years old, folksy Nebraska demeanor, glasses, grandfatherly wisdom, Berkshire Hathaway CEO', company: 'Berkshire Hathaway' },
+  'BRK.B': { name: 'Warren Buffett', appearance: 'elderly man, 94 years old, folksy Nebraska demeanor, glasses, grandfatherly wisdom, Berkshire Hathaway CEO', company: 'Berkshire Hathaway' },
+
+  // Defense
+  'BA': { name: 'Kelly Ortberg', appearance: 'older man, 64 years old, gray hair, aerospace engineer background, Boeing CEO', company: 'Boeing' },
+  'LMT': { name: 'Jim Taiclet', appearance: 'older man, 64 years old, military bearing, former Army officer, Lockheed Martin CEO', company: 'Lockheed Martin' },
+  'RTX': { name: 'Chris Calio', appearance: 'middle-aged man, aerospace executive appearance, Raytheon CEO', company: 'Raytheon' },
+
+  // Pharma
+  'PFE': { name: 'Albert Bourla', appearance: 'older man, 63 years old, Greek accent, veterinarian background, Pfizer CEO', company: 'Pfizer' },
+  'JNJ': { name: 'Joaquin Duato', appearance: 'middle-aged Hispanic man, 62 years old, Spanish accent, Johnson & Johnson CEO', company: 'Johnson & Johnson' },
+  'MRNA': { name: 'Stéphane Bancel', appearance: 'middle-aged man, 51 years old, French accent, intense biotech energy, Moderna CEO', company: 'Moderna' },
+
+  // Oil/Energy
+  'XOM': { name: 'Darren Woods', appearance: 'middle-aged man, 59 years old, Texas oil executive appearance, ExxonMobil CEO', company: 'ExxonMobil' },
+  'CVX': { name: 'Mike Wirth', appearance: 'older man, 64 years old, California energy executive style, Chevron CEO', company: 'Chevron' },
+
+  // Retail/Consumer
+  'WMT': { name: 'Doug McMillon', appearance: 'middle-aged man, 58 years old, Arkansas friendly demeanor, started as warehouse worker, Walmart CEO', company: 'Walmart' },
+  'COST': { name: 'Ron Vachris', appearance: 'middle-aged man, warehouse retail background, Costco CEO', company: 'Costco' },
+  'DIS': { name: 'Bob Iger', appearance: 'older man, 73 years old, silver hair, Hollywood mogul presence, Disney CEO', company: 'Disney' },
+  'NFLX': { name: 'Ted Sarandos', appearance: 'middle-aged man, 60 years old, Hollywood entertainment executive, Netflix co-CEO', company: 'Netflix' },
+
+  // Other Tech
+  'CRM': { name: 'Marc Benioff', appearance: 'large man, 59 years old, Hawaiian shirt sometimes, tech philanthropist, Salesforce CEO', company: 'Salesforce' },
+  'ORCL': { name: 'Safra Catz', appearance: 'older woman, 62 years old, Israeli-American, intense business demeanor, Oracle CEO', company: 'Oracle' },
+  'AMD': { name: 'Lisa Su', appearance: 'middle-aged Asian American woman, 55 years old, MIT engineer background, semiconductor expertise, AMD CEO', company: 'AMD' },
+  'INTC': { name: 'Pat Gelsinger', appearance: 'older man, 63 years old, engineer background, Intel veteran, Intel CEO', company: 'Intel' },
+};
+
+// Get CEO info for a trade if available
+function getCEOInfo(trade: Trade): { name: string; appearance: string; company: string } | null {
+  const ticker = trade.issuer.ticker;
+  if (ticker && CEO_APPEARANCES[ticker]) {
+    return CEO_APPEARANCES[ticker];
+  }
+  return null;
+}
+
 // Female first names for gender detection
 const FEMALE_NAMES = [
   'Nancy', 'Elizabeth', 'Debbie', 'Diane', 'Barbara', 'Maria', 'Susan', 'Karen',
@@ -174,42 +228,71 @@ function pickRandom<T>(arr: T[]): T {
 }
 
 const MEME_SCENARIOS = [
-  // ===== SPECIFIC STOCK SCENARIOS =====
+  // ===== SPECIFIC STOCK SCENARIOS WITH CEO INTERACTIONS =====
   {
-    // NVIDIA specific - reverent tech worship
+    // NVIDIA specific - Jensen Huang interaction
     condition: (trade: Trade) => trade.issuer.ticker === 'NVDA' || trade.issuer.name.includes('NVIDIA'),
-    template: (trade: Trade) => pickRandom([
-      {
-        imagePrompt: `${STYLE}. Portrait of ${getPoliticianDescription(trade)} in a dark server room, face illuminated by green light from a massive NVIDIA H100 GPU held reverently in their hands, expression of awe, data center racks in background, Jensen Huang poster on wall, cinematic green lighting`,
-        caption: `${trade.politician.name} (${trade.politician.party === 'Democrat' ? 'D' : 'R'}-${trade.politician.state}) receives the blessing of Jensen`,
-      },
-      {
-        imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} kneeling before altar made of stacked GPUs, NVIDIA cathedral of technology, green divine light streaming down, worshipful expression, tech pilgrimage aesthetic`,
-        caption: `${trade.politician.name} makes pilgrimage to the Church of NVIDIA`,
-      },
-    ]),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      return pickRandom([
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Jensen Huang in black leather jacket'} personally handing a glowing NVIDIA H100 GPU to ${getPoliticianDescription(trade)}, both standing in dark server room, green GPU light illuminating their faces, reverent moment, data center cathedral aesthetic`,
+          caption: `${trade.politician.name} receives GPU blessing directly from ${ceo?.name || 'Jensen Huang'}`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo?.appearance || 'Jensen Huang in leather jacket'} doing secret handshake in NVIDIA headquarters lobby, green ambient lighting, both with knowing smiles, AI chips floating in background`,
+          caption: `${trade.politician.name} and ${ceo?.name || 'Jensen'}: "The stock is just getting started"`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Jensen Huang'} cooking on stage at GTC conference, serving a plate of GPU chips to ${getPoliticianDescription(trade)} seated in VIP front row, theatrical presentation lighting`,
+          caption: `${ceo?.name || 'Jensen'} serves ${trade.politician.name} a fresh helping of NVDA`,
+        },
+      ]);
+    },
   },
   {
-    // Tesla - Elon fanboy/fangirl
+    // Tesla - Elon Musk interaction
     condition: (trade: Trade) => trade.issuer.ticker === 'TSLA' || trade.issuer.name.includes('Tesla'),
-    template: (trade: Trade) => pickRandom([
-      {
-        imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} standing next to Cybertruck in Tesla showroom, arms crossed confidently, electric blue lighting, futuristic aesthetic, Mars poster in background`,
-        caption: `${trade.politician.name} ${trade.type === 'buy' ? 'bets on' : 'exits'} the Musk-verse`,
-      },
-      {
-        imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} charging station scene, plugging in electric vehicle, smug expression, green energy aesthetic, solar panels visible`,
-        caption: `${trade.politician.name} ${trade.type === 'buy' ? 'charges up' : 'unplugs from'} TSLA`,
-      },
-    ]),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      return pickRandom([
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Elon Musk'} handing Cybertruck keys to ${getPoliticianDescription(trade)} at Tesla factory, both doing awkward thumbs up, Optimus robots in background, futuristic industrial lighting`,
+          caption: `${ceo?.name || 'Elon'} personally delivers the TSLA gains to ${trade.politician.name}`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo?.appearance || 'Elon Musk'} standing on Mars surface in SpaceX suits, Tesla Roadster floating in space behind them, Earth visible in sky, epic sci-fi aesthetic`,
+          caption: `${trade.politician.name} ${trade.type === 'buy' ? 'joins' : 'exits'} the ${ceo?.name || 'Musk'}-verse`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Elon Musk'} and ${getPoliticianDescription(trade)} doing joint Twitter/X spaces from Tesla Gigafactory, both wearing hard hats, screens showing stock chart going up`,
+          caption: `${ceo?.name || 'Elon'} welcomes ${trade.politician.name} to the TSLA family`,
+        },
+      ]);
+    },
   },
   {
-    // Pharma/Healthcare
+    // Pharma/Healthcare with CEO
     condition: (trade: Trade) => trade.issuer.ticker === 'PFE' || trade.issuer.ticker === 'JNJ' || trade.issuer.ticker === 'MRNA' || trade.issuer.ticker === 'UNH' || trade.issuer.name.includes('Pharma') || trade.issuer.name.includes('Health'),
-    template: (trade: Trade) => ({
-      imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} in white lab coat, standing in pharmaceutical laboratory, holding giant pill bottle labeled "${trade.issuer.ticker}", test tubes and molecules floating around, clinical blue-white lighting, healthcare aesthetic`,
-      caption: `${trade.politician.name} prescribes ${trade.type === 'buy' ? 'a dose of' : 'selling'} ${trade.issuer.ticker || trade.issuer.name}`,
-    }),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      if (ceo) {
+        return pickRandom([
+          {
+            imagePrompt: `${STYLE}. ${ceo.appearance} handing giant pill bottle labeled "${trade.issuer.ticker} GAINS" to ${getPoliticianDescription(trade)} in pharmaceutical laboratory, both in white lab coats, molecules floating around, clinical blue-white lighting`,
+            caption: `${ceo.name} prescribes ${trade.politician.name} a dose of ${trade.issuer.ticker}`,
+          },
+          {
+            imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo.appearance} shaking hands at FDA approval ceremony, giant check for "${trade.sizeRange}", pharma logos in background, flashbulbs going off`,
+            caption: `${trade.politician.name} celebrates with ${ceo.name} after ${trade.type === 'buy' ? 'investing in' : 'selling'} ${trade.issuer.ticker}`,
+          },
+        ]);
+      }
+      return {
+        imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} in white lab coat, standing in pharmaceutical laboratory, holding giant pill bottle labeled "${trade.issuer.ticker}", test tubes and molecules floating around, clinical blue-white lighting, healthcare aesthetic`,
+        caption: `${trade.politician.name} prescribes ${trade.type === 'buy' ? 'a dose of' : 'selling'} ${trade.issuer.ticker || trade.issuer.name}`,
+      };
+    },
   },
   {
     // Oil/Energy
@@ -220,18 +303,37 @@ const MEME_SCENARIOS = [
     }),
   },
   {
-    // Banks/Finance
+    // Banks/Finance with CEO
     condition: (trade: Trade) => trade.issuer.ticker === 'JPM' || trade.issuer.ticker === 'GS' || trade.issuer.ticker === 'BAC' || trade.issuer.ticker === 'C' || trade.issuer.ticker === 'WFC' || trade.issuer.name.includes('Bank'),
-    template: (trade: Trade) => pickRandom([
-      {
-        imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} in marble bank vault, surrounded by gold bars, ${trade.issuer.name} logo on vault door, monocle and top hat, Gilded Age aesthetic, warm golden lighting`,
-        caption: `${trade.politician.name} visits the ${trade.issuer.ticker} vault`,
-      },
-      {
-        imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} on Wall Street trading floor, screens flashing green, traders in background, power stance, money raining from ceiling, ${trade.issuer.name} banner visible`,
-        caption: `${trade.politician.name} ${trade.type === 'buy' ? 'goes long' : 'closes position'} on ${trade.issuer.ticker}`,
-      },
-    ]),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      if (ceo) {
+        return pickRandom([
+          {
+            imagePrompt: `${STYLE}. ${ceo.appearance} opening massive bank vault door for ${getPoliticianDescription(trade)}, gold bars stacked inside, ${trade.issuer.name} logo on vault, Wall Street power meeting aesthetic`,
+            caption: `${ceo.name} shows ${trade.politician.name} where the ${trade.issuer.ticker} magic happens`,
+          },
+          {
+            imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo.appearance} toasting champagne on Wall Street trading floor, ${trade.issuer.name} banner behind them, screens showing green arrows, money aesthetic`,
+            caption: `${trade.politician.name} toasts ${trade.type === 'buy' ? 'the beginning' : 'the end'} with ${ceo.name}`,
+          },
+          {
+            imagePrompt: `${STYLE}. ${ceo.appearance} handing oversized golden key to ${getPoliticianDescription(trade)} at ${trade.issuer.name} headquarters lobby, marble columns, Gilded Age banking aesthetic`,
+            caption: `${ceo.name} grants ${trade.politician.name} VIP access to ${trade.issuer.ticker}`,
+          },
+        ]);
+      }
+      return pickRandom([
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} in marble bank vault, surrounded by gold bars, ${trade.issuer.name} logo on vault door, monocle and top hat, Gilded Age aesthetic, warm golden lighting`,
+          caption: `${trade.politician.name} visits the ${trade.issuer.ticker} vault`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} on Wall Street trading floor, screens flashing green, traders in background, power stance, money raining from ceiling, ${trade.issuer.name} banner visible`,
+          caption: `${trade.politician.name} ${trade.type === 'buy' ? 'goes long' : 'closes position'} on ${trade.issuer.ticker}`,
+        },
+      ]);
+    },
   },
 
   // ===== TRADE SIZE SCENARIOS =====
@@ -330,46 +432,95 @@ const MEME_SCENARIOS = [
     ]),
   },
 
-  // ===== BIG TECH SCENARIOS =====
+  // ===== BIG TECH SCENARIOS WITH CEO INTERACTIONS =====
   {
-    // Apple
+    // Apple - Tim Cook interaction
     condition: (trade: Trade) => trade.issuer.ticker === 'AAPL' || trade.issuer.name.includes('Apple'),
-    template: (trade: Trade) => ({
-      imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} in Apple Store, hugging giant iPhone like precious object, minimalist white aesthetic, glass architecture, reverential expression, blue shirt staff in background`,
-      caption: `${trade.politician.name} ${trade.type === 'buy' ? 'thinks different' : 'thinks again'} about AAPL`,
-    }),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      return pickRandom([
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Tim Cook with silver hair and glasses'} personally unveiling new iPhone to ${getPoliticianDescription(trade)} at Apple Park, Steve Jobs Theater stage, minimalist white aesthetic, dramatic product reveal lighting`,
+          caption: `${ceo?.name || 'Tim Cook'} gives ${trade.politician.name} an early look at AAPL's future`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo?.appearance || 'Tim Cook'} walking together through Apple Park spaceship campus, glass walls, California sunshine, discussing strategy`,
+          caption: `${trade.politician.name} takes a walk with ${ceo?.name || 'Tim'} before ${trade.type === 'buy' ? 'buying' : 'selling'}`,
+        },
+      ]);
+    },
   },
   {
-    // Microsoft
+    // Microsoft - Satya Nadella interaction
     condition: (trade: Trade) => trade.issuer.ticker === 'MSFT' || trade.issuer.name.includes('Microsoft'),
-    template: (trade: Trade) => ({
-      imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} in Microsoft campus cafeteria, Surface tablet in hand, Azure cloud logo floating overhead, corporate blue aesthetic, Satya Nadella portrait visible`,
-      caption: `${trade.politician.name} ${trade.type === 'buy' ? 'embraces' : 'updates away from'} the Microsoft cloud`,
-    }),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      return pickRandom([
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Satya Nadella bald with glasses'} showing ${getPoliticianDescription(trade)} an Azure holographic display, Microsoft campus, blue cloud aesthetic, both looking at AI visualizations`,
+          caption: `${ceo?.name || 'Satya'} shows ${trade.politician.name} the cloud's silver lining`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo?.appearance || 'Satya Nadella'} shaking hands at Microsoft Ignite conference, giant MSFT logo behind them, enterprise software aesthetic`,
+          caption: `${trade.politician.name} ${trade.type === 'buy' ? 'partners with' : 'parts ways with'} ${ceo?.name || 'Satya'}`,
+        },
+      ]);
+    },
   },
   {
-    // Google/Alphabet
+    // Google/Alphabet - Sundar Pichai interaction
     condition: (trade: Trade) => trade.issuer.ticker === 'GOOGL' || trade.issuer.ticker === 'GOOG' || trade.issuer.name.includes('Google') || trade.issuer.name.includes('Alphabet'),
-    template: (trade: Trade) => ({
-      imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} sliding down Google campus slide, colorful ball pit below, playful tech campus aesthetic, search bar showing "${trade.politician.name} ${trade.issuer.ticker} trade", whimsical lighting`,
-      caption: `${trade.politician.name} just Googled "${trade.type === 'buy' ? 'how to buy' : 'when to sell'} GOOGL"`,
-    }),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      return pickRandom([
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Sundar Pichai with graying hair'} giving ${getPoliticianDescription(trade)} a tour of Google data center, colorful server lights, AI brain visualizations, tech wonderland aesthetic`,
+          caption: `${ceo?.name || 'Sundar'} shows ${trade.politician.name} where the algorithm magic happens`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo?.appearance || 'Sundar Pichai'} sitting in Google bean bag chairs, colorful office, search bar showing "${trade.politician.name} GOOGL ${trade.type}" on giant screen`,
+          caption: `${trade.politician.name} gets insider search results from ${ceo?.name || 'Sundar'}`,
+        },
+      ]);
+    },
   },
   {
-    // Amazon
+    // Amazon - Andy Jassy interaction
     condition: (trade: Trade) => trade.issuer.ticker === 'AMZN' || trade.issuer.name.includes('Amazon'),
-    template: (trade: Trade) => ({
-      imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} in Amazon warehouse, surrounded by delivery boxes, Prime logo everywhere, robot workers in background, package labeled "${trade.issuer.ticker} SHARES" in hands`,
-      caption: `${trade.politician.name} gets 2-day delivery on ${trade.type === 'buy' ? 'AMZN gains' : 'selling AMZN'}`,
-    }),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      return pickRandom([
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Andy Jassy bald and intense'} handing oversized Amazon package labeled "PRIME GAINS" to ${getPoliticianDescription(trade)} in fulfillment center, robots working behind them`,
+          caption: `${ceo?.name || 'Andy Jassy'} delivers 2-day gains to ${trade.politician.name}`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo?.appearance || 'Andy Jassy'} standing next to AWS server rack, cloud computing visualizations, Amazon spheres visible through window`,
+          caption: `${trade.politician.name} ${trade.type === 'buy' ? 'subscribes to' : 'cancels'} ${ceo?.name || 'Andy'}'s Prime service`,
+        },
+      ]);
+    },
   },
   {
-    // Meta
+    // Meta - Mark Zuckerberg interaction
     condition: (trade: Trade) => trade.issuer.ticker === 'META' || trade.issuer.name.includes('Meta') || trade.issuer.name.includes('Facebook'),
-    template: (trade: Trade) => ({
-      imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} wearing VR headset in metaverse, floating in digital void, virtual stock charts around them, blue infinity logo, surreal digital aesthetic`,
-      caption: `${trade.politician.name} enters the META-verse to ${trade.type}`,
-    }),
+    template: (trade: Trade) => {
+      const ceo = getCEOInfo(trade);
+      return pickRandom([
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Mark Zuckerberg with curly hair in gray t-shirt'} fitting VR headset onto ${getPoliticianDescription(trade)} in Meta headquarters, metaverse portal glowing behind them, blue infinity logo`,
+          caption: `${ceo?.name || 'Zuck'} welcomes ${trade.politician.name} to the metaverse`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${getPoliticianDescription(trade)} and ${ceo?.appearance || 'Mark Zuckerberg looking robotic'} awkwardly doing MMA fighting poses in Meta gym, both trying to look tough, Threads logo visible`,
+          caption: `${trade.politician.name} and ${ceo?.name || 'Zuck'}: ${trade.type === 'buy' ? 'partnership goals' : 'irreconcilable differences'}`,
+        },
+        {
+          imagePrompt: `${STYLE}. ${ceo?.appearance || 'Mark Zuckerberg'} showing ${getPoliticianDescription(trade)} his sword collection in Meta office, both examining blade, bizarre tech bro aesthetic`,
+          caption: `${ceo?.name || 'Zuck'} explains the META thesis to ${trade.politician.name}`,
+        },
+      ]);
+    },
   },
 
   // ===== GENERIC BUY SCENARIOS (varied) =====
