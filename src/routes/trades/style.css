@@ -1,0 +1,195 @@
+.trades-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--s6);
+
+  .trades-page--header {
+    display: flex;
+    align-items: center;
+    gap: var(--s3);
+    margin-bottom: var(--s5);
+
+    h1 {
+      font-size: var(--fs-xl);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .time-range {
+      padding: var(--s1) var(--s3);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+    }
+  }
+
+  .trades-page--content {
+    margin-top: var(--s5);
+  }
+
+  .no-results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s12);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+
+    p {
+      color: var(--text-secondary);
+      font-size: var(--fs-md);
+    }
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s3);
+    margin-top: var(--s5);
+    padding: var(--s4);
+
+    .pagination--btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+
+      svg { width: 18px; height: 18px; }
+
+      &:hover:not(:disabled) {
+        background: var(--bg-hover);
+        color: var(--text-primary);
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+
+    .pagination--info {
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+
+      strong { color: var(--text-primary); }
+    }
+  }
+}
+
+.trades-filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+  padding: var(--s4);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s3);
+    align-items: center;
+  }
+
+  .search-input {
+    position: relative;
+    flex: 1;
+    min-width: 180px;
+    max-width: 240px;
+
+    svg {
+      position: absolute;
+      left: var(--s3);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      padding: var(--s2) var(--s3) var(--s2) var(--s8);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      transition: border-color var(--transition-fast);
+
+      &::placeholder { color: var(--text-muted); }
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-accent);
+      }
+    }
+  }
+
+  .select-wrapper {
+    position: relative;
+    min-width: 140px;
+
+    select {
+      width: 100%;
+      padding: var(--s2) var(--s8) var(--s2) var(--s3);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-size: var(--fs-sm);
+      appearance: none;
+      cursor: pointer;
+      transition: border-color var(--transition-fast);
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-accent);
+      }
+
+      &:has(option:checked:not([value=""])) {
+        color: var(--text-primary);
+      }
+    }
+
+    svg {
+      position: absolute;
+      right: var(--s3);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+  }
+
+  .clear-btn {
+    padding: var(--s2) var(--s4);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+      border-color: var(--border-light);
+    }
+  }
+}

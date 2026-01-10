@@ -1,0 +1,83 @@
+.trade-tooltip-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.ai-insight-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+  }
+
+  &:hover {
+    background: var(--bg-hover);
+    border-color: var(--color-accent);
+
+    svg {
+      color: var(--color-accent);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  &[aria-expanded="true"] {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+
+    svg {
+      color: white;
+    }
+  }
+}
+
+.trade-tooltip-popover {
+  position: absolute;
+  top: calc(100% + var(--s2));
+  right: 0;
+  z-index: 100;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure tooltip doesn't get cut off on small screens */
+@media (max-width: 640px) {
+  .trade-tooltip-popover {
+    position: fixed;
+    top: auto;
+    right: var(--s3);
+    bottom: var(--s3);
+    left: var(--s3);
+
+    .ai-insight-card {
+      max-width: none;
+      width: 100%;
+    }
+  }
+}

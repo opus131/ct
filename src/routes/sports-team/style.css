@@ -1,0 +1,311 @@
+.sports-team-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--s6);
+
+  .not-found {
+    text-align: center;
+    padding: var(--s12);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+
+    h2 {
+      font-size: var(--fs-xl);
+      margin-bottom: var(--s3);
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: var(--s5);
+    }
+
+    a {
+      color: var(--color-accent);
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .sports-team-page--header {
+    display: flex;
+    align-items: center;
+    gap: var(--s6);
+    padding: var(--s6);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+    margin-bottom: var(--s5);
+  }
+
+  .sports-team-page--logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
+
+  .sports-team-page--info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+
+    .league-badge {
+      display: inline-block;
+      width: fit-content;
+      padding: var(--s1) var(--s3);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+    }
+
+    h1 {
+      font-size: var(--fs-2xl);
+      font-weight: 600;
+    }
+
+    .supporter-count {
+      font-size: var(--fs-md);
+      color: var(--text-secondary);
+    }
+  }
+
+  /* Stats Section */
+  .sports-team-page--stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s4);
+    margin-bottom: var(--s5);
+  }
+
+  .stats-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+    padding: var(--s5);
+
+    h3 {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--s4);
+    }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s4);
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .stat-value {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+  }
+
+  .stats-loading {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    padding: var(--s3);
+    text-align: center;
+  }
+
+  /* Party Breakdown */
+  .party-bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s4);
+  }
+
+  .party-bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+  }
+
+  .party-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .party-label {
+      font-size: var(--fs-sm);
+      font-weight: 500;
+
+      &.democrat { color: var(--color-democrat); }
+      &.republican { color: var(--color-republican); }
+    }
+
+    .party-count {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+
+  .bar-track {
+    height: 8px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+
+    &.democrat { background: var(--color-democrat); }
+    &.republican { background: var(--color-republican); }
+  }
+
+  /* Trading Stats Card Glow */
+  .stats-card.trading-stats {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.1);
+  }
+
+  .stats-card.team-performance {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.08);
+  }
+
+  /* Supporters Section */
+  .sports-team-page--supporters {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--glass-border);
+    padding: var(--s5);
+    margin-bottom: var(--s5);
+
+    h2 {
+      font-size: var(--fs-lg);
+      font-weight: 600;
+      margin-bottom: var(--s5);
+      color: var(--text-primary);
+    }
+  }
+
+  .supporters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--s4);
+  }
+
+  .supporter-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+    padding: var(--s4);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--glass-border-hover);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .supporter-card--photo {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 2px solid var(--glass-border);
+  }
+
+  .supporter-card--info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .name {
+      font-size: var(--fs-base);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .meta {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+
+      &.democrat {
+        color: var(--color-democrat);
+      }
+
+      &.republican {
+        color: var(--color-republican);
+      }
+    }
+  }
+
+  .supporter-card--stats {
+    display: flex;
+    gap: var(--s4);
+    padding-top: var(--s3);
+    border-top: 1px solid var(--glass-border);
+    margin-top: auto;
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      .value {
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .label {
+        font-size: var(--fs-xs);
+        color: var(--text-muted);
+      }
+    }
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sports-team-page {
+    .sports-team-page--stats {
+      grid-template-columns: 1fr;
+    }
+  }
+}

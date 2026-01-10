@@ -1,0 +1,164 @@
+.politician-detail {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--s6);
+
+  .not-found {
+    text-align: center;
+    padding: var(--s12);
+    color: var(--text-secondary);
+    font-size: var(--fs-lg);
+  }
+
+  .politician-detail--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--s6);
+    padding: var(--s6);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+  }
+
+  .politician-detail--profile {
+    display: flex;
+    align-items: center;
+    gap: var(--s5);
+  }
+
+  .politician-detail--photo {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 3px solid var(--border-color);
+  }
+
+  .politician-detail--info {
+    h1 {
+      font-size: var(--fs-2xl);
+      font-weight: 600;
+      margin-bottom: var(--s2);
+    }
+  }
+
+  .politician-detail--meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s3);
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+
+    .badge {
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .badge-democrat {
+      background: color-mix(in srgb, var(--color-democrat) 20%, transparent);
+      color: var(--color-democrat);
+    }
+
+    .badge-republican {
+      background: color-mix(in srgb, var(--color-republican) 20%, transparent);
+      color: var(--color-republican);
+    }
+
+    .chamber, .state {
+      padding: var(--s1) var(--s2);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+    }
+  }
+
+  .politician-detail--last-traded {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--s1);
+
+    .label {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .value {
+      font-size: var(--fs-md);
+      color: var(--text-primary);
+    }
+  }
+
+  .politician-detail--charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s5);
+    margin-top: var(--s6);
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .politician-detail--trades {
+    margin-top: var(--s6);
+
+    .trades-header {
+      display: flex;
+      align-items: center;
+      gap: var(--s4);
+      margin-bottom: var(--s4);
+
+      h2 {
+        font-size: var(--fs-lg);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .filter-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--s2);
+        padding: var(--s1) var(--s3);
+        background: var(--color-accent);
+        color: white;
+        border-radius: var(--radius-full);
+        font-size: var(--fs-xs);
+        font-weight: 500;
+
+        .filter-count {
+          opacity: 0.8;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 18px;
+          height: 18px;
+          margin-left: var(--s1);
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          font-size: 14px;
+          line-height: 1;
+          transition: background var(--transition-fast);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.35);
+          }
+        }
+      }
+    }
+
+    .no-trades {
+      text-align: center;
+      padding: var(--s8);
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+  }
+}

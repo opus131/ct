@@ -1,0 +1,161 @@
+.trades-table {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead {
+    background: var(--bg-secondary);
+
+    th {
+      padding: var(--s3) var(--s4);
+      text-align: left;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border-color);
+    }
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background var(--transition-fast);
+
+    &:hover { background: var(--bg-hover); }
+    &:last-child { border-bottom: none; }
+  }
+
+  td {
+    padding: var(--s3) var(--s4);
+    font-size: var(--fs-sm);
+    color: var(--text-primary);
+    vertical-align: middle;
+  }
+
+  .politician-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--s3);
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      object-fit: cover;
+    }
+
+    .politician-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .name { font-weight: 500; color: var(--color-accent); }
+    .meta {
+      font-size: var(--fs-xs);
+      color: var(--text-secondary);
+
+      .democrat { color: var(--color-democrat); }
+      .republican { color: var(--color-republican); }
+    }
+  }
+
+  .issuer-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--s3);
+
+    .issuer-badge {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+    }
+
+    .issuer-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .name { font-weight: 500; color: var(--color-accent); }
+    .ticker { font-size: var(--fs-xs); color: var(--text-secondary); }
+  }
+
+  .date-cell {
+    .time { display: block; font-size: var(--fs-xs); color: var(--text-muted); }
+    .date { display: block; }
+  }
+
+  .filed-cell {
+    .days { font-weight: 600; }
+    .label { font-size: var(--fs-xs); color: var(--text-secondary); margin-left: var(--s1); }
+  }
+
+  .owner-cell { color: var(--text-secondary); }
+
+  .trade-type {
+    display: inline-block;
+    padding: var(--s1) var(--s2);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+
+    &.buy {
+      background: color-mix(in srgb, var(--color-buy) 20%, transparent);
+      color: var(--color-buy);
+    }
+
+    &.sell {
+      background: color-mix(in srgb, var(--color-sell) 20%, transparent);
+      color: var(--color-sell);
+    }
+  }
+
+  .size-cell {
+    .size-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s1);
+      padding: var(--s1) var(--s2);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-xs);
+      color: var(--text-secondary);
+    }
+  }
+
+  .price-cell { font-weight: 500; }
+
+  .ai-col {
+    width: 80px;
+    text-align: center;
+  }
+
+  .ai-cell {
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s2);
+  }
+
+  &.compact {
+    td { padding: var(--s2) var(--s3); }
+    .politician-cell img { width: 28px; height: 28px; }
+  }
+}

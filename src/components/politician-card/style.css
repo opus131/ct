@@ -1,0 +1,174 @@
+.politician-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: var(--s3) var(--s4);
+  padding: var(--s5);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--glass-border);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--glass-border-hover);
+  }
+
+  /* Party-specific card glows */
+  &.party--democrat {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.08);
+    &:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 50px rgba(59, 130, 246, 0.15);
+    }
+  }
+
+  &.party--republican {
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.08);
+    &:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 50px rgba(239, 68, 68, 0.15);
+    }
+  }
+
+  /* Avatar */
+  .politician-card--avatar {
+    grid-row: 1 / 3;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 0 2px transparent;
+    transition: box-shadow var(--transition-base);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &.party--democrat .politician-card--avatar {
+    border-color: var(--color-democrat);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--color-democrat) 40%, transparent);
+  }
+
+  &.party--republican .politician-card--avatar {
+    border-color: var(--color-republican);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--color-republican) 40%, transparent);
+  }
+
+  &:hover .politician-card--avatar {
+    box-shadow: 0 0 24px color-mix(in srgb, currentColor 50%, transparent);
+  }
+
+  /* Info section */
+  .politician-card--info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--s1);
+    min-width: 0;
+  }
+
+  .politician-card--name {
+    font-size: var(--fs-md);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .politician-card--affiliation {
+    display: flex;
+    align-items: center;
+    gap: var(--s2);
+    font-size: var(--fs-xs);
+    color: var(--text-secondary);
+
+    .party-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .party-badge--democrat {
+      background: var(--color-democrat);
+    }
+
+    .party-badge--republican {
+      background: var(--color-republican);
+    }
+
+    .chamber, .state {
+      color: var(--text-muted);
+    }
+
+    .chamber::after {
+      content: '·';
+      margin-left: var(--s2);
+      color: var(--text-muted);
+    }
+  }
+
+  /* Traits section */
+  .politician-card--traits {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s1);
+    padding-top: var(--s2);
+  }
+
+  .trait-overflow {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px var(--s1);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+  }
+
+  /* Stats section */
+  .politician-card--stats {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s2);
+    padding-top: var(--s3);
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+
+    .stat-value {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+  }
+}
