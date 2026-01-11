@@ -73,7 +73,7 @@ export async function generateTradeInsight(
 
   try {
     const response = await client.models.generateContentStream({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {
         systemInstruction: SYSTEM_PROMPT,

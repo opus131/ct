@@ -5,6 +5,7 @@ import { For, Show, createMemo } from 'solid-js';
 
 import { PredictionMarkets } from '../../components/prediction-markets';
 import { TradeLabelBadge } from '../../components/trade-label-badge';
+import { TradeMarquee } from '../../components/trade-marquee';
 import { getTrades, isTradesLoading } from '../../data/data-service';
 import { politicians } from '../../data/politicians';
 import { issuers } from '../../data/issuers';
@@ -29,6 +30,7 @@ export function Home() {
 
   return (
     <div class="home">
+      <TradeMarquee />
       <div class="home--grid">
         <section class="home--latest-trades">
           <div class="section-header">

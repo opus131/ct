@@ -43,6 +43,20 @@ function formatBirthDate(dob: string): string {
   return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
+function formatTenureDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+
+function getCongressLabel(congressId: string): string {
+  const num = parseInt(congressId, 10);
+  if (isNaN(num)) return congressId;
+  const suffix = num % 10 === 1 && num !== 11 ? 'st' :
+                 num % 10 === 2 && num !== 12 ? 'nd' :
+                 num % 10 === 3 && num !== 13 ? 'rd' : 'th';
+  return `${num}${suffix} Congress`;
+}
+
 export function PoliticianDetail() {
   const params = useParams<{ id: string }>();
   const politician = () => getPoliticianById(params.id);
@@ -160,6 +174,9 @@ export function PoliticianDetail() {
                   <div class="politician-detail--meta">
                     <span class={`badge badge-${p().party.toLowerCase()}`}>{p().party}</span>
                     <span class="chamber">{p().chamber}</span>
+                    <Show when={p().district}>
+                      <span class="district">District {p().district}</span>
+                    </Show>
                     <span class="state">{p().state}</span>
                   </div>
                   <Show when={p().traits && p().traits!.length > 0}>
@@ -167,6 +184,30 @@ export function PoliticianDetail() {
                       <For each={p().traits as TraitId[]}>
                         {(traitId) => <TraitBadge traitId={traitId} size="md" />}
                       </For>
+                    </div>
+                  </Show>
+                  <Show when={p().socialLinks}>
+                    <div class="politician-detail--social">
+                      <Show when={p().socialLinks?.twitter}>
+                        <a href={`https://twitter.com/${p().socialLinks!.twitter}`} target="_blank" rel="noopener noreferrer" class="social-link" title="Twitter">
+                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                      </Show>
+                      <Show when={p().socialLinks?.facebook}>
+                        <a href={`https://facebook.com/${p().socialLinks!.facebook}`} target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook">
+                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                      </Show>
+                      <Show when={p().socialLinks?.youtube}>
+                        <a href={`https://youtube.com/${p().socialLinks!.youtube}`} target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube">
+                          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                      </Show>
+                      <Show when={p().socialLinks?.website}>
+                        <a href={p().socialLinks!.website} target="_blank" rel="noopener noreferrer" class="social-link" title="Website">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </a>
+                      </Show>
                     </div>
                   </Show>
                 </div>
@@ -193,6 +234,43 @@ export function PoliticianDetail() {
             </div>
 
             <StatsRow stats={statItems()} />
+
+            <Show when={p().committees && p().committees!.length > 0}>
+              <div class="politician-detail--committees">
+                <h3>Committee Assignments</h3>
+                <div class="committees-list">
+                  <For each={p().committees}>
+                    {(committee) => (
+                      <div class="committee-item">
+                        <span>{committee.name}</span>
+                        <Show when={committee.rank}>
+                          <span class="committee-rank">Rank {committee.rank}</span>
+                        </Show>
+                      </div>
+                    )}
+                  </For>
+                </div>
+              </div>
+            </Show>
+
+            <Show when={p().tenure && p().tenure!.length > 0}>
+              <div class="politician-detail--tenure">
+                <h3>Service History</h3>
+                <div class="tenure-list">
+                  <For each={p().tenure}>
+                    {(tenure) => (
+                      <div class="tenure-item">
+                        <span class="tenure-chamber">{tenure.chamber}</span>
+                        <span class="tenure-dates">
+                          {formatTenureDate(tenure.startDate)} – {formatTenureDate(tenure.endDate)}
+                        </span>
+                        <span class="tenure-congress">{getCongressLabel(tenure.congressId)}</span>
+                      </div>
+                    )}
+                  </For>
+                </div>
+              </div>
+            </Show>
 
             <div class="politician-detail--charts">
               <TradingActivityChart

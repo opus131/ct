@@ -1,0 +1,82 @@
+.trade-marquee {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--s3) 0;
+  margin-bottom: var(--s6);
+}
+
+.trade-marquee--track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 60s linear infinite;
+}
+
+.trade-marquee--track:hover {
+  animation-play-state: paused;
+}
+
+.trade-marquee--content {
+  display: flex;
+  gap: var(--s8);
+  padding-right: var(--s8);
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.marquee-politician {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.marquee-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  background: var(--bg-secondary);
+}
+
+.marquee-ticker {
+  font-weight: 700;
+  font-size: var(--fs-sm);
+
+  &.buy {
+    color: var(--color-buy);
+  }
+
+  &.sell {
+    color: var(--color-sell);
+  }
+}
+
+.marquee-size {
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.marquee-type {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

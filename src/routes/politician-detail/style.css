@@ -79,6 +79,40 @@
     margin-top: var(--s3);
   }
 
+  .politician-detail--social {
+    display: flex;
+    gap: var(--s2);
+    margin-top: var(--s3);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      background: var(--color-accent);
+      color: white;
+    }
+  }
+
+  .district {
+    padding: var(--s1) var(--s2);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+  }
+
   .politician-detail--info-cards {
     display: flex;
     gap: var(--s6);
@@ -113,6 +147,93 @@
     .sub {
       font-size: var(--fs-xs);
       color: var(--text-secondary);
+    }
+  }
+
+  .politician-detail--committees {
+    margin-top: var(--s6);
+    padding: var(--s5);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+
+    h3 {
+      font-size: var(--fs-md);
+      font-weight: 600;
+      margin-bottom: var(--s3);
+      color: var(--text-primary);
+    }
+
+    .committees-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s2);
+    }
+
+    .committee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s2);
+      padding: var(--s2) var(--s3);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+
+      .committee-rank {
+        font-size: var(--fs-xs);
+        color: var(--text-muted);
+        padding: 2px var(--s1);
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-xs);
+      }
+    }
+  }
+
+  .politician-detail--tenure {
+    margin-top: var(--s4);
+    padding: var(--s5);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+
+    h3 {
+      font-size: var(--fs-md);
+      font-weight: 600;
+      margin-bottom: var(--s3);
+      color: var(--text-primary);
+    }
+
+    .tenure-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s2);
+    }
+
+    .tenure-item {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+      padding: var(--s2) var(--s3);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+
+      .tenure-chamber {
+        font-weight: 500;
+        color: var(--text-primary);
+        min-width: 60px;
+      }
+
+      .tenure-dates {
+        color: var(--text-secondary);
+      }
+
+      .tenure-congress {
+        font-size: var(--fs-xs);
+        color: var(--text-muted);
+        margin-left: auto;
+      }
     }
   }
 

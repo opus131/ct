@@ -4,6 +4,18 @@ import type { TraitId } from './traits';
 
 const CAPITOL_TRADES_CDN = 'https://www.capitoltrades.com/assets/politicians';
 
+type RawTenure = {
+  congressId: string;
+  chamber: string;
+  startDate: string;
+  endDate: string;
+};
+
+type RawCommittee = {
+  committeeName: string;
+  rank?: number;
+};
+
 type RawPolitician = {
   _politicianId: string;
   _stateId: string;
@@ -11,10 +23,18 @@ type RawPolitician = {
   firstName: string;
   lastName: string;
   nickname: string | null;
+  middleName?: string | null;
   fullName: string;
   chamber: string;
+  district?: string | null;
   dob: string;
   gender: string;
+  website?: string | null;
+  socialTwitter?: string | null;
+  socialFacebook?: string | null;
+  socialYoutube?: string | null;
+  tenure?: RawTenure[];
+  committees?: RawCommittee[];
   stats: {
     countFilings: number;
     countIssuers: number;
@@ -157,12 +177,35 @@ function transformPolitician(raw: RawPolitician): Politician {
     ? `${raw.nickname} ${raw.lastName}`
     : `${raw.firstName} ${raw.lastName}`;
 
+  // Build social links if any exist
+  const socialLinks: Politician['socialLinks'] = {};
+  if (raw.website && raw.website !== 'N/A') socialLinks.website = raw.website;
+  if (raw.socialTwitter) socialLinks.twitter = raw.socialTwitter.replace('@', '');
+  if (raw.socialFacebook) socialLinks.facebook = raw.socialFacebook;
+  if (raw.socialYoutube) socialLinks.youtube = raw.socialYoutube;
+  const hasSocialLinks = Object.keys(socialLinks).length > 0;
+
+  // Transform tenure data
+  const tenure = raw.tenure?.map((t) => ({
+    congressId: t.congressId,
+    chamber: mapChamber(t.chamber),
+    startDate: t.startDate,
+    endDate: t.endDate,
+  }));
+
+  // Transform committee data
+  const committees = raw.committees?.map((c) => ({
+    name: c.committeeName,
+    rank: c.rank,
+  }));
+
   return {
     id: raw._politicianId,
     name,
     party: mapParty(raw.party),
     chamber: mapChamber(raw.chamber),
     state: raw._stateId.toUpperCase(),
+    district: raw.district || undefined,
     photoUrl: `${CAPITOL_TRADES_CDN}/${raw._politicianId.toLowerCase()}.jpg`,
     trades: raw.stats.countTrades,
     filings: raw.stats.countFilings,
@@ -173,6 +216,9 @@ function transformPolitician(raw: RawPolitician): Politician {
     yearsActive: computeYearsActive(raw.stats.dateFirstTraded, raw.stats.dateLastTraded),
     dob: raw.dob || undefined,
     gender: raw.gender === 'M' || raw.gender === 'F' ? raw.gender : undefined,
+    socialLinks: hasSocialLinks ? socialLinks : undefined,
+    tenure: tenure?.length ? tenure : undefined,
+    committees: committees?.length ? committees : undefined,
     traits: computeTraits(raw),
   };
 }

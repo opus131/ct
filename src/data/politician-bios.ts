@@ -211,7 +211,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Mark Green - Tennessee
-  G000545: {
+  G000590: {
     biography:
       'Mark Edward Green is an American physician, politician, and retired United States Army officer serving as the U.S. representative for Tennessee\'s 7th congressional district since 2019. A West Point graduate, Green served in the 160th Special Operations Aviation Regiment and was the flight surgeon in the operation that captured Saddam Hussein.',
     birthDate: '1964-11-08',
@@ -551,6 +551,224 @@ export const politicianBios: Record<string, PoliticianBio> = {
       { name: 'Stanford Cardinal', league: 'NCAA', logoUrl: `${ESPN_NCAA}/24.png` },
     ],
     twitterHandle: 'RepZoeLofgren',
+  },
+
+  // Kevin Hern - Oklahoma
+  H001082: {
+    biography:
+      'Kevin Ray Hern is an American businessman and politician serving as the U.S. representative for Oklahoma\'s 1st congressional district since 2018. A member of the Republican Party, he is the owner of multiple McDonald\'s franchises and chairs the Republican Study Committee.',
+    birthDate: '1961-12-04',
+    birthPlace: 'Belton, Missouri',
+    education: ['Arkansas Tech University, B.S. Engineering'],
+    careerStart: 2018,
+    twitterHandle: 'repkevinhern',
+  },
+
+  // Lloyd Doggett - Texas
+  D000399: {
+    biography:
+      'Lloyd Alton Doggett II is an American politician and attorney serving as the U.S. representative for Texas\'s 37th congressional district since 2023, and previously for other Texas districts since 1995. A member of the Democratic Party, he serves on the Ways and Means Committee.',
+    birthDate: '1946-10-06',
+    birthPlace: 'Austin, Texas',
+    education: [
+      'University of Texas at Austin, B.A., 1967',
+      'University of Texas School of Law, J.D., 1970',
+    ],
+    careerStart: 1995,
+    twitterHandle: 'RepLloydDoggett',
+  },
+
+  // Maria Elvira Salazar - Florida
+  S000168: {
+    biography:
+      'Maria Elvira Salazar is an American journalist and politician serving as the U.S. representative for Florida\'s 27th congressional district since 2021. A member of the Republican Party, she previously worked as a television journalist for Spanish-language networks.',
+    birthDate: '1961-11-01',
+    birthPlace: 'Miami, Florida',
+    education: ['University of Miami, B.A. Communications'],
+    careerStart: 2021,
+    sportsTeams: [{ name: 'Miami Dolphins', league: 'NFL', logoUrl: `${ESPN_NFL}/mia.png` }],
+    twitterHandle: 'RepMariaSalazar',
+  },
+
+  // Scott Peters - California
+  P000608: {
+    biography:
+      'Scott Hamilton Peters is an American politician and attorney serving as the U.S. representative for California\'s 50th congressional district since 2013. A member of the Democratic Party, he previously served on the San Diego City Council and as a port commissioner.',
+    birthDate: '1958-06-17',
+    birthPlace: 'Springfield, Ohio',
+    education: [
+      'Duke University, B.A., 1980',
+      'New York University School of Law, J.D., 1984',
+    ],
+    careerStart: 2013,
+    twitterHandle: 'RepScottPeters',
+  },
+
+  // John Curtis - Utah
+  C001114: {
+    biography:
+      'John Ringer Curtis is an American politician serving as the U.S. representative for Utah\'s 3rd congressional district since 2017. A member of the Republican Party, he previously served as the mayor of Provo, Utah from 2010 to 2017.',
+    birthDate: '1960-05-10',
+    birthPlace: 'Salt Lake City, Utah',
+    education: ['Brigham Young University, B.S. Business Management, 1985'],
+    careerStart: 2017,
+    twitterHandle: 'RepJohnCurtis',
+  },
+
+  // Shelley Moore Capito - West Virginia
+  C001047: {
+    biography:
+      'Shelley Wellons Moore Capito is an American politician serving as the senior United States senator from West Virginia since 2015. A member of the Republican Party, she was the first female senator elected from West Virginia and previously served in the U.S. House.',
+    birthDate: '1953-11-26',
+    birthPlace: 'Glen Dale, West Virginia',
+    education: [
+      'Duke University, B.S., 1975',
+      'University of Virginia, M.Ed., 1976',
+    ],
+    careerStart: 2001,
+    twitterHandle: 'SenCapito',
+  },
+
+  // Susie Lee - Nevada
+  L000590: {
+    biography:
+      'Susie Lee is an American businesswoman and politician serving as the U.S. representative for Nevada\'s 3rd congressional district since 2019. A member of the Democratic Party, she is a nonprofit executive and education advocate.',
+    birthDate: '1966-11-07',
+    birthPlace: 'Canton, Ohio',
+    education: ['Carnegie Mellon University, B.S.', 'Carnegie Mellon University, M.P.M.'],
+    careerStart: 2019,
+    twitterHandle: 'RepSusieLee',
+  },
+
+  // Rudy Yakym - Indiana
+  Y000067: {
+    biography:
+      'Rudy Yakym III is an American businessman and politician serving as the U.S. representative for Indiana\'s 2nd congressional district since 2022. A member of the Republican Party, he won a special election following the death of Jackie Walorski.',
+    birthDate: '1984-02-24',
+    birthPlace: 'Elkhart, Indiana',
+    education: ['Indiana University, B.A.', 'University of Notre Dame, J.D.'],
+    careerStart: 2022,
+    sportsTeams: [
+      { name: 'Notre Dame Fighting Irish', league: 'NCAA', logoUrl: `${ESPN_NCAA}/87.png` },
+      { name: 'Indianapolis Colts', league: 'NFL', logoUrl: `${ESPN_NFL}/ind.png` },
+    ],
+    twitterHandle: 'RepRudyYakym',
+  },
+
+  // Neal Dunn - Florida
+  D000628: {
+    biography:
+      'Neal Patrick Dunn is an American physician and politician serving as the U.S. representative for Florida\'s 2nd congressional district since 2017. A member of the Republican Party, he is a urologist and U.S. Army veteran.',
+    birthDate: '1953-02-16',
+    birthPlace: 'New Haven, Connecticut',
+    education: [
+      'Washington and Lee University, B.S.',
+      'George Washington University School of Medicine, M.D.',
+    ],
+    careerStart: 2017,
+    twitterHandle: 'DrNealDunnFL2',
+  },
+
+  // Dan Meuser - Pennsylvania
+  M001204: {
+    biography:
+      'Daniel David Meuser is an American businessman and politician serving as the U.S. representative for Pennsylvania\'s 9th congressional district since 2019. A member of the Republican Party, he previously served as Pennsylvania\'s Secretary of Revenue.',
+    birthDate: '1964-02-10',
+    birthPlace: 'Bronx, New York',
+    education: ['Cornell University, B.S.'],
+    careerStart: 2019,
+    sportsTeams: [
+      { name: 'Penn State Nittany Lions', league: 'NCAA', logoUrl: `${ESPN_NCAA}/213.png` },
+      { name: 'Philadelphia Eagles', league: 'NFL', logoUrl: `${ESPN_NFL}/phi.png` },
+    ],
+    twitterHandle: 'RepMeuser',
+  },
+
+  // Jennifer McClellan - Virginia
+  M001227: {
+    biography:
+      'Jennifer Leigh McClellan is an American attorney and politician serving as the U.S. representative for Virginia\'s 4th congressional district since 2023. A member of the Democratic Party, she is the first Black woman elected to Congress from Virginia.',
+    birthDate: '1972-12-28',
+    birthPlace: 'Petersburg, Virginia',
+    education: [
+      'University of Richmond, B.A., 1994',
+      'University of Virginia School of Law, J.D., 1997',
+    ],
+    careerStart: 2023,
+    twitterHandle: 'RepMcClellan',
+  },
+
+  // Lois Frankel - Florida
+  F000462: {
+    biography:
+      'Lois Jane Frankel is an American politician serving as the U.S. representative for Florida\'s 22nd congressional district since 2013. A member of the Democratic Party, she previously served as mayor of West Palm Beach and in the Florida House of Representatives.',
+    birthDate: '1948-05-16',
+    birthPlace: 'New York City, New York',
+    education: [
+      'Boston University, B.A., 1970',
+      'Georgetown University Law Center, J.D., 1973',
+    ],
+    careerStart: 2013,
+    sportsTeams: [{ name: 'Miami Dolphins', league: 'NFL', logoUrl: `${ESPN_NFL}/mia.png` }],
+    twitterHandle: 'RepLoisFrankel',
+  },
+
+  // Victoria Spartz - Indiana
+  S000929: {
+    biography:
+      'Victoria Spartz is a Ukrainian-born American politician and businesswoman serving as the U.S. representative for Indiana\'s 5th congressional district since 2021. A member of the Republican Party, she previously served in the Indiana State Senate.',
+    birthDate: '1978-10-06',
+    birthPlace: 'Nosivka, Ukrainian SSR',
+    education: [
+      'Kyiv National Economic University, B.A., 2000',
+      'Kyiv National Economic University, M.B.A., 2006',
+      'Indiana University Kelley School of Business, M.P.A., 2014',
+    ],
+    careerStart: 2021,
+    sportsTeams: [{ name: 'Indianapolis Colts', league: 'NFL', logoUrl: `${ESPN_NFL}/ind.png` }],
+    twitterHandle: 'RepSpartz',
+  },
+
+  // Buddy Carter - Georgia
+  C001103: {
+    biography:
+      'Earl Leroy \'Buddy\' Carter is an American pharmacist and politician serving as the U.S. representative for Georgia\'s 1st congressional district since 2015. A member of the Republican Party, he is the only pharmacist currently serving in Congress.',
+    birthDate: '1957-09-06',
+    birthPlace: 'Port Wentworth, Georgia',
+    education: ['University of Georgia College of Pharmacy, B.S. Pharmacy, 1980'],
+    careerStart: 2015,
+    sportsTeams: [
+      { name: 'Georgia Bulldogs', league: 'NCAA', logoUrl: `${ESPN_NCAA}/61.png` },
+      { name: 'Atlanta Falcons', league: 'NFL', logoUrl: `${ESPN_NFL}/atl.png` },
+    ],
+    twitterHandle: 'RepBuddyCarter',
+  },
+
+  // Kathy Manning - North Carolina
+  M001135: {
+    biography:
+      'Kathy Ellen Manning is an American attorney and politician serving as the U.S. representative for North Carolina\'s 6th congressional district since 2021. A member of the Democratic Party, she previously worked as an immigration attorney and nonprofit leader.',
+    birthDate: '1956-12-03',
+    birthPlace: 'Detroit, Michigan',
+    education: [
+      'University of Michigan, B.A., 1978',
+      'Harvard Law School, J.D., 1981',
+    ],
+    careerStart: 2021,
+    sportsTeams: [{ name: 'Carolina Panthers', league: 'NFL', logoUrl: `${ESPN_NFL}/car.png` }],
+    twitterHandle: 'RepKathyManning',
+  },
+
+  // Tracey Mann - Kansas
+  M000871: {
+    biography:
+      'Tracey Mann is an American politician and real estate broker serving as the U.S. representative for Kansas\'s 1st congressional district since 2021. A member of the Republican Party, he previously served as Lieutenant Governor of Kansas from 2018 to 2019 under Governor Jeff Colyer.',
+    birthDate: '1976-12-17',
+    birthPlace: 'Quinter, Kansas',
+    education: ['Kansas State University, B.S. Agricultural Economics, 2000'],
+    careerStart: 2021,
+    sportsTeams: [{ name: 'Kansas State Wildcats', league: 'NCAA', logoUrl: `${ESPN_NCAA}/2306.png` }],
+    twitterHandle: 'RepTraceyMann',
   },
 };
 

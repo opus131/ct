@@ -17,6 +17,18 @@ export type SocialLinks = {
   youtube?: string;
 };
 
+export type Tenure = {
+  congressId: string;
+  chamber: Chamber;
+  startDate: string;
+  endDate: string;
+};
+
+export type Committee = {
+  name: string;
+  rank?: number;
+};
+
 export type Politician = {
   id: string;
   name: string;
@@ -35,6 +47,8 @@ export type Politician = {
   dob?: string;
   gender?: 'M' | 'F';
   socialLinks?: SocialLinks;
+  tenure?: Tenure[];
+  committees?: Committee[];
   traits?: string[];
   biography?: string;
   birthDate?: string;
