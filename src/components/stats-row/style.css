@@ -1,9 +1,19 @@
 .stats-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--s4);
 
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s3);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+  }
+
   .stats-row--item {
-    flex: 1;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -12,6 +22,10 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      padding: var(--s4) var(--s5);
+    }
   }
 
   .stats-row--value {
@@ -19,6 +33,10 @@
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.2;
+
+    @media (max-width: 640px) {
+      font-size: var(--fs-xl);
+    }
   }
 
   .stats-row--label {
@@ -27,6 +45,10 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: var(--s1);
+
+    @media (max-width: 640px) {
+      font-size: var(--fs-xs);
+    }
   }
 
   .stats-row--icon {
@@ -38,6 +60,12 @@
     height: 48px;
     color: var(--text-muted);
     opacity: 0.3;
+
+    @media (max-width: 640px) {
+      width: 36px;
+      height: 36px;
+      right: var(--s3);
+    }
 
     svg {
       width: 100%;

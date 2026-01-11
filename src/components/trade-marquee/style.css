@@ -6,12 +6,21 @@
   border-bottom: 1px solid var(--border-color);
   padding: var(--s3) 0;
   margin-bottom: var(--s6);
+
+  @media (max-width: 768px) {
+    padding: var(--s2) 0;
+    margin-bottom: var(--s4);
+  }
 }
 
 .trade-marquee--track {
   display: flex;
   gap: 0;
   animation: marquee-scroll 40s linear infinite;
+
+  @media (max-width: 768px) {
+    animation-duration: 30s;
+  }
 }
 
 .trade-marquee--content {
@@ -19,6 +28,16 @@
   flex-shrink: 0;
   gap: var(--s8);
   padding-right: var(--s8);
+
+  @media (max-width: 768px) {
+    gap: var(--s5);
+    padding-right: var(--s5);
+  }
+
+  @media (max-width: 640px) {
+    gap: var(--s4);
+    padding-right: var(--s4);
+  }
 }
 
 .marquee-item {
@@ -27,6 +46,10 @@
   gap: var(--s2);
   text-decoration: none;
   white-space: nowrap;
+
+  @media (max-width: 640px) {
+    gap: 6px;
+  }
 }
 
 .marquee-politician {
@@ -34,11 +57,20 @@
   height: 24px;
   border-radius: var(--radius-full);
   object-fit: cover;
+
+  @media (max-width: 640px) {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .marquee-ticker {
   font-weight: 700;
   font-size: var(--fs-sm);
+
+  @media (max-width: 640px) {
+    font-size: var(--fs-xs);
+  }
 
   &.buy {
     color: var(--color-buy);
@@ -53,12 +85,20 @@
   font-size: var(--fs-sm);
   color: var(--text-primary);
   font-weight: 500;
+
+  @media (max-width: 640px) {
+    font-size: var(--fs-xs);
+  }
 }
 
 .marquee-type {
   font-size: var(--fs-xs);
   font-weight: 500;
   color: var(--text-muted);
+
+  @media (max-width: 640px) {
+    font-size: 10px;
+  }
 }
 
 @keyframes marquee-scroll {

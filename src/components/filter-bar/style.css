@@ -4,11 +4,23 @@
   gap: var(--s3);
   margin-bottom: var(--s5);
 
+  @media (max-width: 640px) {
+    gap: var(--s2);
+  }
+
   .filter-bar--search {
     position: relative;
     flex: 1;
     min-width: 200px;
     max-width: 300px;
+
+    @media (max-width: 640px) {
+      flex: none;
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+      order: -1;
+    }
 
     svg {
       position: absolute;
@@ -41,6 +53,11 @@
   .filter-bar--select {
     position: relative;
     min-width: 140px;
+
+    @media (max-width: 640px) {
+      flex: 1;
+      min-width: calc(50% - var(--s1));
+    }
 
     select {
       width: 100%;

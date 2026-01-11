@@ -148,6 +148,11 @@
     gap: var(--s2);
     padding-top: var(--s3);
     border-top: 1px solid var(--glass-border);
+
+    @media (max-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s3);
+    }
   }
 
   .stat {
