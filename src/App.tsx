@@ -11,6 +11,8 @@ import { PoliticianDetail } from './routes/politician-detail';
 import { PoliticianBio } from './routes/politician-bio';
 import { Issuers } from './routes/issuers';
 import { IssuerDetail } from './routes/issuer-detail';
+import { Committees } from './routes/committees';
+import { CommitteeDetail } from './routes/committee-detail';
 import { SportsTeam } from './routes/sports-team';
 
 function Layout(props: ParentProps) {
@@ -32,6 +34,8 @@ export default function App() {
       <Route path="/politicians/:id/bio" component={PoliticianBio} />
       <Route path="/issuers" component={Issuers} />
       <Route path="/issuers/:id" component={IssuerDetail} />
+      <Route path="/committees" component={Committees} />
+      <Route path="/committees/:id" component={CommitteeDetail} />
       <Route path="/sports/:slug" component={SportsTeam} />
     </Router>
   );
