@@ -138,7 +138,7 @@ export function Home() {
               View all on Polymarket
             </a>
           </div>
-          <PredictionMarkets limit={6} />
+          <PredictionMarkets limit={8} />
         </section>
 
         <section class="home--featured-issuers">
