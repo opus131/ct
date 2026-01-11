@@ -1,9 +1,13 @@
 import './style.css';
 
+import { For } from 'solid-js';
+
 import type { Trade } from '../../data/types';
 import { TradeTooltip } from '../ai/trade-tooltip';
 import { MemeGenerator } from '../ai/meme-generator';
 import { getIssuerLogoUrl } from '../../data/issuer-logos';
+import { deriveTradeLabels } from '../../data/trade-labels';
+import { TradeLabelBadge } from '../trade-label-badge';
 
 type Props = {
   trades: Trade[];
@@ -31,6 +35,7 @@ export function TradesTable(props: Props) {
             {!props.compact && <th>Owner</th>}
             <th>Type</th>
             <th>Size</th>
+            {!props.compact && <th>Labels</th>}
             {!props.compact && <th>Price</th>}
             {props.showAIInsights && <th class="ai-col">AI</th>}
           </tr>
@@ -40,30 +45,34 @@ export function TradesTable(props: Props) {
             <tr>
               {!props.hidePolitician && (
                 <td class="politician-cell">
-                  <img src={trade.politician.photoUrl} alt={trade.politician.name} />
-                  <div class="politician-info">
-                    <span class="name">{trade.politician.name}</span>
-                    <span class="meta">
-                      <span classList={{ democrat: trade.politician.party === 'Democrat', republican: trade.politician.party === 'Republican' }}>
-                        {trade.politician.party === 'Democrat' ? 'D' : 'R'}
+                  <div class="politician-wrapper">
+                    <img src={trade.politician.photoUrl} alt={trade.politician.name} />
+                    <div class="politician-info">
+                      <span class="name">{trade.politician.name}</span>
+                      <span class="meta">
+                        <span classList={{ democrat: trade.politician.party === 'Democrat', republican: trade.politician.party === 'Republican' }}>
+                          {trade.politician.party === 'Democrat' ? 'D' : 'R'}
+                        </span>
+                        {' | '}{trade.politician.chamber}{' | '}{trade.politician.state}
                       </span>
-                      {' | '}{trade.politician.chamber}{' | '}{trade.politician.state}
-                    </span>
+                    </div>
                   </div>
                 </td>
               )}
               <td class="issuer-cell">
-                {(() => {
-                  const logoUrl = getIssuerLogoUrl(trade.issuer.ticker);
-                  return logoUrl ? (
-                    <img src={logoUrl} alt={trade.issuer.ticker} class="issuer-logo" />
-                  ) : (
-                    <div class="issuer-badge">{trade.issuer.ticker?.[0] || trade.issuer.name[0]}</div>
-                  );
-                })()}
-                <div class="issuer-info">
-                  <span class="name">{trade.issuer.name}</span>
-                  <span class="ticker">{trade.issuer.ticker}</span>
+                <div class="issuer-wrapper">
+                  {(() => {
+                    const logoUrl = getIssuerLogoUrl(trade.issuer.ticker);
+                    return logoUrl ? (
+                      <img src={logoUrl} alt={trade.issuer.ticker} class="issuer-logo" />
+                    ) : (
+                      <div class="issuer-badge">{trade.issuer.ticker?.[0] || trade.issuer.name[0]}</div>
+                    );
+                  })()}
+                  <div class="issuer-info">
+                    <span class="name">{trade.issuer.name}</span>
+                    <span class="ticker">{trade.issuer.ticker}</span>
+                  </div>
                 </div>
               </td>
               {!props.compact && (
@@ -93,14 +102,25 @@ export function TradesTable(props: Props) {
                 <span class="size-badge">{trade.sizeRange}</span>
               </td>
               {!props.compact && (
+                <td class="labels-cell">
+                  <div class="labels-wrapper">
+                    <For each={deriveTradeLabels(trade)}>
+                      {(labelId) => <TradeLabelBadge labelId={labelId} size="sm" />}
+                    </For>
+                  </div>
+                </td>
+              )}
+              {!props.compact && (
                 <td class="price-cell">
                   {trade.price ? `$${trade.price.toLocaleString()}` : 'N/A'}
                 </td>
               )}
               {props.showAIInsights && (
                 <td class="ai-cell">
-                  <TradeTooltip trade={trade} />
-                  <MemeGenerator trade={trade} />
+                  <div class="ai-wrapper">
+                    <TradeTooltip trade={trade} />
+                    <MemeGenerator trade={trade} />
+                  </div>
                 </td>
               )}
             </tr>

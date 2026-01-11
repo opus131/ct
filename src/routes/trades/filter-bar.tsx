@@ -1,6 +1,9 @@
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 
-type FilterState = {
+import { TradeLabelBadge } from '../../components/trade-label-badge';
+import { tradeLabelCategories, getTradeLabelsByCategory, type TradeLabelId } from '../../data/trade-labels';
+
+export type FilterState = {
   politician: string;
   issuer: string;
   chamber: string;
@@ -9,6 +12,7 @@ type FilterState = {
   transactionType: string;
   tradeSize: string;
   owner: string;
+  label: TradeLabelId | '';
 };
 
 type Props = {
@@ -32,6 +36,7 @@ export function TradesFilterBar(props: Props) {
     transactionType: '',
     tradeSize: '',
     owner: '',
+    label: '',
   });
 
   const updateFilter = (key: keyof FilterState, value: string) => {
@@ -171,12 +176,33 @@ export function TradesFilterBar(props: Props) {
             transactionType: '',
             tradeSize: '',
             owner: '',
+            label: '',
           };
           setFilters(emptyFilters);
           props.onFilterChange(emptyFilters);
         }}>
           Clear Filters
         </button>
+      </div>
+
+      <div class="labels-row">
+        <span class="labels-title">Labels:</span>
+        <div class="labels-list">
+          <For each={tradeLabelCategories}>
+            {(category) => (
+              <For each={getTradeLabelsByCategory(category.id)}>
+                {(label) => (
+                  <TradeLabelBadge
+                    labelId={label.id}
+                    size="sm"
+                    selected={filters().label === label.id}
+                    onClick={(id) => updateFilter('label', filters().label === id ? '' : id)}
+                  />
+                )}
+              </For>
+            )}
+          </For>
+        </div>
       </div>
     </div>
   );

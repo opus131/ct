@@ -192,4 +192,26 @@
       border-color: var(--border-light);
     }
   }
+
+  .labels-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s3);
+    padding-top: var(--s3);
+    border-top: 1px solid var(--border-color);
+
+    .labels-title {
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .labels-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s2);
+    }
+  }
 }

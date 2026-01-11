@@ -83,28 +83,26 @@
   .trade-item {
     display: flex;
     align-items: center;
-    gap: var(--s3);
-    padding: var(--s3);
-    border-radius: var(--radius-lg);
+    gap: var(--s2);
+    padding: var(--s2);
+    border-radius: var(--radius-md);
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid transparent;
     transition:
       background var(--transition-fast),
-      border-color var(--transition-fast),
-      transform var(--transition-fast);
+      border-color var(--transition-fast);
 
     &:hover {
       background: rgba(255, 255, 255, 0.05);
       border-color: var(--glass-border);
-      transform: translateX(4px);
     }
 
     .trade-politician-photo {
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       border-radius: var(--radius-full);
       object-fit: cover;
-      border: 2px solid var(--glass-border);
+      border: 1px solid var(--glass-border);
       flex-shrink: 0;
     }
 
@@ -112,20 +110,21 @@
       flex: 1;
       min-width: 0;
       display: flex;
-      flex-direction: column;
-      gap: 4px;
+      align-items: center;
+      gap: var(--s2);
+      flex-wrap: wrap;
     }
 
     .trade-header {
       display: flex;
       align-items: center;
-      gap: var(--s2);
+      gap: var(--s1);
     }
 
     .trade-type {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
-      padding: 2px 6px;
+      padding: 1px 4px;
       border-radius: var(--radius-sm);
       text-transform: uppercase;
 
@@ -140,21 +139,21 @@
     }
 
     .trade-issuer-ticker {
-      font-size: var(--fs-sm);
+      font-size: var(--fs-xs);
       font-weight: 600;
       color: var(--text-primary);
     }
 
     .trade-size {
-      font-size: var(--fs-xs);
+      font-size: 10px;
       color: var(--text-secondary);
-      padding: 2px 6px;
+      padding: 1px 4px;
       background: var(--bg-secondary);
       border-radius: var(--radius-sm);
     }
 
     .trade-date {
-      font-size: var(--fs-xs);
+      font-size: 10px;
       color: var(--text-muted);
       margin-left: auto;
     }
@@ -162,17 +161,17 @@
     .trade-details {
       display: flex;
       align-items: center;
-      gap: var(--s2);
+      gap: var(--s1);
     }
 
     .trade-politician-name {
-      font-size: var(--fs-sm);
+      font-size: var(--fs-xs);
       font-weight: 500;
       color: var(--text-primary);
     }
 
     .trade-politician-party {
-      font-size: var(--fs-xs);
+      font-size: 10px;
       color: var(--text-muted);
 
       &.democrat { color: var(--color-democrat); }
@@ -180,11 +179,13 @@
     }
 
     .trade-issuer-name {
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      display: none;
+    }
+
+    .trade-labels {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
     }
   }
 
@@ -213,6 +214,8 @@
     background: rgba(255, 255, 255, 0.02);
     border-radius: var(--radius-lg);
     border: 1px solid transparent;
+    text-decoration: none;
+    color: inherit;
     transition: background var(--transition-fast), border-color var(--transition-fast);
 
     &:hover {

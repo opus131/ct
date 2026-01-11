@@ -40,9 +40,11 @@
   }
 
   .politician-cell {
-    display: flex;
-    align-items: center;
-    gap: var(--s3);
+    .politician-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+    }
 
     img {
       width: 36px;
@@ -68,9 +70,11 @@
   }
 
   .issuer-cell {
-    display: flex;
-    align-items: center;
-    gap: var(--s3);
+    .issuer-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--s3);
+    }
 
     .issuer-badge {
       width: 32px;
@@ -89,6 +93,7 @@
       width: 32px;
       height: 32px;
       object-fit: contain;
+      filter: brightness(0) invert(0.5);
     }
 
     .issuer-info {
@@ -144,6 +149,15 @@
     }
   }
 
+  .labels-cell {
+    .labels-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s1);
+      max-width: 200px;
+    }
+  }
+
   .price-cell { font-weight: 500; }
 
   .ai-col {
@@ -154,10 +168,12 @@
   .ai-cell {
     text-align: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--s2);
+    .ai-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--s2);
+    }
   }
 
   &.compact {

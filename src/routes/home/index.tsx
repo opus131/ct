@@ -4,9 +4,11 @@ import { A } from '@solidjs/router';
 import { For, Show, createMemo } from 'solid-js';
 
 import { PredictionMarkets } from '../../components/prediction-markets';
+import { TradeLabelBadge } from '../../components/trade-label-badge';
 import { getTrades, isTradesLoading } from '../../data/data-service';
 import { politicians } from '../../data/politicians';
 import { issuers } from '../../data/issuers';
+import { deriveTradeLabels } from '../../data/trade-labels';
 
 function formatRelativeDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -75,6 +77,11 @@ export function Home() {
                         </span>
                       </div>
                       <div class="trade-issuer-name">{trade.issuer.name}</div>
+                      <div class="trade-labels">
+                        <For each={deriveTradeLabels(trade)}>
+                          {(labelId) => <TradeLabelBadge labelId={labelId} size="sm" />}
+                        </For>
+                      </div>
                     </div>
                   </A>
                 )}
@@ -90,7 +97,7 @@ export function Home() {
           </div>
           <div class="politicians-list">
             {politicians.slice(0, 3).map((politician) => (
-              <div class="featured-politician">
+              <A href={`/politicians/${politician.id}`} class="featured-politician">
                 <img src={politician.photoUrl} alt={politician.name} />
                 <div class="politician-info">
                   <span class="name">{politician.name}</span>
@@ -126,7 +133,7 @@ export function Home() {
                     />
                   </svg>
                 </div>
-              </div>
+              </A>
             ))}
           </div>
         </section>

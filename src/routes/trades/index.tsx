@@ -4,21 +4,11 @@ import { createSignal, createMemo, createEffect } from 'solid-js';
 
 import { StatsRow } from '../../components/stats-row';
 import { TradesTable } from '../../components/trades-table';
-import { TradesFilterBar } from './filter-bar';
+import { TradesFilterBar, type FilterState } from './filter-bar';
 import { trades as allTrades } from '../../data/trades';
+import { deriveTradeLabels } from '../../data/trade-labels';
 
 const TRADES_PER_PAGE = 20;
-
-type FilterState = {
-  politician: string;
-  issuer: string;
-  chamber: string;
-  party: string;
-  state: string;
-  transactionType: string;
-  tradeSize: string;
-  owner: string;
-};
 
 export function Trades() {
   const [filters, setFilters] = createSignal<FilterState>({
@@ -30,6 +20,7 @@ export function Trades() {
     transactionType: '',
     tradeSize: '',
     owner: '',
+    label: '',
   });
   const [currentPage, setCurrentPage] = createSignal(1);
 
@@ -59,6 +50,12 @@ export function Trades() {
       }
       if (f.owner && trade.owner !== f.owner) {
         return false;
+      }
+      if (f.label) {
+        const tradeLabels = deriveTradeLabels(trade);
+        if (!tradeLabels.includes(f.label)) {
+          return false;
+        }
       }
       return true;
     });
