@@ -85,6 +85,12 @@
       color: var(--text-secondary);
     }
 
+    .issuer-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
     .issuer-info {
       display: flex;
       flex-direction: column;

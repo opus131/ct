@@ -72,6 +72,13 @@
     }
   }
 
+  .politician-detail--traits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s2);
+    margin-top: var(--s3);
+  }
+
   .politician-detail--info-cards {
     display: flex;
     gap: var(--s6);

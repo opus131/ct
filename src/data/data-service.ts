@@ -1,5 +1,6 @@
 import { createResource, createSignal } from 'solid-js';
 import type { Trade, Politician, Issuer, IssuerPerformance, Party, Chamber, OwnerType, TradeType, Stats } from './types';
+import type { TraitId } from './traits';
 
 const CAPITOL_TRADES_CDN = 'https://www.capitoltrades.com/assets/politicians';
 
@@ -125,6 +126,32 @@ function computeYearsActive(firstTraded: string | null, lastTraded: string | nul
   return first ? `${first}` : last ? `${last}` : undefined;
 }
 
+function computeTraits(raw: RawPolitician): TraitId[] {
+  const traits: TraitId[] = [];
+  const { countTrades, countFilings, countIssuers, volume, dateFirstTraded } = raw.stats;
+
+  // Trading behavior traits
+  if (countTrades >= 200) traits.push('high-volume');
+  if (countTrades >= 50 && countFilings > 0 && countTrades / countFilings >= 3) traits.push('frequent-trader');
+  if (volume >= 5_000_000) traits.push('big-positions');
+
+  // Diversity traits based on issuers
+  if (countIssuers >= 30) traits.push('tech-heavy'); // placeholder for diverse portfolio
+
+  // Seniority based on first traded date
+  if (dateFirstTraded) {
+    const firstYear = new Date(dateFirstTraded).getFullYear();
+    const yearsActive = new Date().getFullYear() - firstYear;
+    if (yearsActive >= 10) traits.push('senior-member');
+    else if (yearsActive <= 2) traits.push('freshman');
+  }
+
+  // Filing patterns - high filing count relative to trades suggests timely/thorough reporting
+  if (countFilings > 0 && countTrades / countFilings < 2) traits.push('timely-filer');
+
+  return traits;
+}
+
 function transformPolitician(raw: RawPolitician): Politician {
   const name = raw.nickname
     ? `${raw.nickname} ${raw.lastName}`
@@ -146,6 +173,7 @@ function transformPolitician(raw: RawPolitician): Politician {
     yearsActive: computeYearsActive(raw.stats.dateFirstTraded, raw.stats.dateLastTraded),
     dob: raw.dob || undefined,
     gender: raw.gender === 'M' || raw.gender === 'F' ? raw.gender : undefined,
+    traits: computeTraits(raw),
   };
 }
 

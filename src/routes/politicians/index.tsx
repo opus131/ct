@@ -1,7 +1,7 @@
 import './style.css';
 
 import { A } from '@solidjs/router';
-import { createSignal, createMemo, For, Show } from 'solid-js';
+import { createSignal, createMemo, createEffect, For, Show } from 'solid-js';
 
 import { StatsRow } from '../../components/stats-row';
 import { FilterBar } from '../../components/filter-bar';
@@ -11,9 +11,12 @@ import { getPoliticians, stats } from '../../data/politicians';
 import type { Politician } from '../../data/types';
 import { traitCategories, getTraitsByCategory, type TraitId } from '../../data/traits';
 
+const POLITICIANS_PER_PAGE = 24;
+
 export function Politicians() {
   const [selectedTraits, setSelectedTraits] = createSignal<TraitId[]>([]);
   const [showTraitFilter, setShowTraitFilter] = createSignal(true);
+  const [currentPage, setCurrentPage] = createSignal(1);
 
   const toggleTrait = (traitId: TraitId) => {
     setSelectedTraits((prev) =>
@@ -32,6 +35,27 @@ export function Politicians() {
       return selected.some((t) => pTraits.includes(t));
     });
   });
+
+  // Reset to page 1 when filters change
+  createEffect(() => {
+    selectedTraits();
+    setCurrentPage(1);
+  });
+
+  const totalPages = createMemo(() => Math.max(1, Math.ceil(filteredPoliticians().length / POLITICIANS_PER_PAGE)));
+
+  const paginatedPoliticians = createMemo(() => {
+    const start = (currentPage() - 1) * POLITICIANS_PER_PAGE;
+    return filteredPoliticians().slice(start, start + POLITICIANS_PER_PAGE);
+  });
+
+  const goToPage = (page: number) => {
+    const total = totalPages();
+    if (page >= 1 && page <= total) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const statItems = [
     { value: stats.trades.toLocaleString(), label: 'Trades', icon: 'trades' as const },
@@ -107,7 +131,7 @@ export function Politicians() {
       </div>
 
       <div class="politicians-page--grid">
-        <For each={filteredPoliticians()}>
+        <For each={paginatedPoliticians()}>
           {(politician) => (
             <A href={`/politicians/${politician.id}`}>
               <PoliticianCard
@@ -118,6 +142,52 @@ export function Politicians() {
             </A>
           )}
         </For>
+      </div>
+
+      <div class="pagination">
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === 1}
+          onClick={() => goToPage(1)}
+          title="First page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m11 17-5-5 5-5M18 17l-5-5 5-5" />
+          </svg>
+        </button>
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === 1}
+          onClick={() => goToPage(currentPage() - 1)}
+          title="Previous page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <span class="pagination--info">
+          Page <strong>{currentPage()}</strong> of <strong>{totalPages()}</strong>
+        </span>
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === totalPages()}
+          onClick={() => goToPage(currentPage() + 1)}
+          title="Next page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === totalPages()}
+          onClick={() => goToPage(totalPages())}
+          title="Last page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m13 17 5-5-5-5M6 17l5-5-5-5" />
+          </svg>
+        </button>
       </div>
     </div>
   );

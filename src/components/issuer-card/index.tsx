@@ -2,6 +2,7 @@ import './style.css';
 
 import { Show } from 'solid-js';
 import type { Issuer } from '../../data/types';
+import { getIssuerLogoUrl, getIssuerBrandColor } from '../../data/issuer-logos';
 
 type Props = {
   issuer: Issuer;
@@ -22,10 +23,22 @@ export function IssuerCard(props: Props) {
     return i.sector.toLowerCase().replace(/\s+/g, '-');
   };
 
+  const logoUrl = () => getIssuerLogoUrl(i.ticker);
+  const brandColor = () => getIssuerBrandColor(i.ticker);
+
   return (
     <article class={`issuer-card sector--${sectorClass()}`}>
-      <div class="issuer-card--badge">
-        <span class="badge-letter">{tickerInitial()}</span>
+      <div class="issuer-card--badge" classList={{ 'has-logo': !!logoUrl() }}>
+        <Show when={logoUrl()} fallback={<span class="badge-letter">{tickerInitial()}</span>}>
+          <div
+            class="badge-logo"
+            style={{
+              'background-color': brandColor() || '#666',
+              '-webkit-mask-image': `url(${logoUrl()})`,
+              'mask-image': `url(${logoUrl()})`,
+            }}
+          />
+        </Show>
       </div>
       <div class="issuer-card--info">
         <h3 class="issuer-card--name">{i.name}</h3>

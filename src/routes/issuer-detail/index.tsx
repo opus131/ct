@@ -15,6 +15,7 @@ import { PriceChart } from '../../components/charts/price-chart';
 import { TopPoliticiansChart } from '../../components/charts/top-politicians-chart';
 import { getIssuerById, getTradesForIssuer, getIssuerPerformance } from '../../data/issuers';
 import { getPoliticianById } from '../../data/politicians';
+import { getIssuerLogoUrl, getIssuerBrandColor } from '../../data/issuer-logos';
 import type { TradeType, Politician } from '../../data/types';
 
 type FilterState = {
@@ -102,6 +103,16 @@ export function IssuerDetail() {
     return i.name.charAt(0).toUpperCase();
   };
 
+  const logoUrl = () => {
+    const i = issuer();
+    return i ? getIssuerLogoUrl(i.ticker) : null;
+  };
+
+  const brandColor = () => {
+    const i = issuer();
+    return i ? getIssuerBrandColor(i.ticker) : null;
+  };
+
   const statItems = () => {
     const i = issuer();
     if (!i) return [];
@@ -129,8 +140,17 @@ export function IssuerDetail() {
           <>
             <div class="issuer-detail--header">
               <div class="issuer-detail--profile">
-                <div class="issuer-detail--badge">
-                  <span class="badge-letter">{tickerInitial()}</span>
+                <div class="issuer-detail--badge" classList={{ 'has-logo': !!logoUrl() }}>
+                  <Show when={logoUrl()} fallback={<span class="badge-letter">{tickerInitial()}</span>}>
+                    <div
+                      class="badge-logo"
+                      style={{
+                        'background-color': brandColor() || '#666',
+                        '-webkit-mask-image': `url(${logoUrl()})`,
+                        'mask-image': `url(${logoUrl()})`,
+                      }}
+                    />
+                  </Show>
                 </div>
                 <div class="issuer-detail--info">
                   <h1>{i().name}</h1>

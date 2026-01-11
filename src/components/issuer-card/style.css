@@ -37,50 +37,66 @@
       color: white;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
+
+    .badge-logo {
+      width: 36px;
+      height: 36px;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+    }
+
+    &.has-logo {
+      background: white !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
   }
 
-  /* Sector-based badge colors */
-  &.sector--information-technology .issuer-card--badge {
+  /* Sector-based badge colors (only when no logo) */
+  &.sector--information-technology .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   }
 
-  &.sector--health-care .issuer-card--badge {
+  &.sector--health-care .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #10b981, #059669);
   }
 
-  &.sector--financials .issuer-card--badge {
+  &.sector--financials .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #f59e0b, #d97706);
   }
 
-  &.sector--consumer-discretionary .issuer-card--badge {
+  &.sector--consumer-discretionary .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #ec4899, #db2777);
   }
 
-  &.sector--industrials .issuer-card--badge {
+  &.sector--industrials .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #6b7280, #4b5563);
   }
 
-  &.sector--communication-services .issuer-card--badge {
+  &.sector--communication-services .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #8b5cf6, #7c3aed);
   }
 
-  &.sector--energy .issuer-card--badge {
+  &.sector--energy .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #ef4444, #dc2626);
   }
 
-  &.sector--materials .issuer-card--badge {
+  &.sector--materials .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #78716c, #57534e);
   }
 
-  &.sector--utilities .issuer-card--badge {
+  &.sector--utilities .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #14b8a6, #0d9488);
   }
 
-  &.sector--real-estate .issuer-card--badge {
+  &.sector--real-estate .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #a855f7, #9333ea);
   }
 
-  &.sector--consumer-staples .issuer-card--badge {
+  &.sector--consumer-staples .issuer-card--badge:not(.has-logo) {
     background: linear-gradient(135deg, #22c55e, #16a34a);
   }
 

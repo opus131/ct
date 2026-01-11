@@ -3,6 +3,7 @@ import './style.css';
 import type { Trade } from '../../data/types';
 import { TradeTooltip } from '../ai/trade-tooltip';
 import { MemeGenerator } from '../ai/meme-generator';
+import { getIssuerLogoUrl } from '../../data/issuer-logos';
 
 type Props = {
   trades: Trade[];
@@ -52,7 +53,14 @@ export function TradesTable(props: Props) {
                 </td>
               )}
               <td class="issuer-cell">
-                <div class="issuer-badge">{trade.issuer.ticker?.[0] || trade.issuer.name[0]}</div>
+                {(() => {
+                  const logoUrl = getIssuerLogoUrl(trade.issuer.ticker);
+                  return logoUrl ? (
+                    <img src={logoUrl} alt={trade.issuer.ticker} class="issuer-logo" />
+                  ) : (
+                    <div class="issuer-badge">{trade.issuer.ticker?.[0] || trade.issuer.name[0]}</div>
+                  );
+                })()}
                 <div class="issuer-info">
                   <span class="name">{trade.issuer.name}</span>
                   <span class="ticker">{trade.issuer.ticker}</span>

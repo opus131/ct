@@ -1,12 +1,14 @@
 import './style.css';
 
 import { A } from '@solidjs/router';
-import { createSignal, createMemo, For, Show } from 'solid-js';
+import { createSignal, createMemo, createEffect, For, Show } from 'solid-js';
 
 import { StatsRow } from '../../components/stats-row';
 import { IssuerCard } from '../../components/issuer-card';
 import { getIssuers, getAllSectors } from '../../data/issuers';
 import type { Issuer } from '../../data/types';
+
+const ISSUERS_PER_PAGE = 24;
 
 type FilterState = {
   search: string;
@@ -35,6 +37,7 @@ export function Issuers() {
   });
 
   const [showFilters, setShowFilters] = createSignal(false);
+  const [currentPage, setCurrentPage] = createSignal(1);
 
   const sectors = createMemo(() => getAllSectors());
 
@@ -78,6 +81,27 @@ export function Issuers() {
       return true;
     });
   });
+
+  // Reset to page 1 when filters change
+  createEffect(() => {
+    filters();
+    setCurrentPage(1);
+  });
+
+  const totalPages = createMemo(() => Math.max(1, Math.ceil(filteredIssuers().length / ISSUERS_PER_PAGE)));
+
+  const paginatedIssuers = createMemo(() => {
+    const start = (currentPage() - 1) * ISSUERS_PER_PAGE;
+    return filteredIssuers().slice(start, start + ISSUERS_PER_PAGE);
+  });
+
+  const goToPage = (page: number) => {
+    const total = totalPages();
+    if (page >= 1 && page <= total) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const stats = createMemo(() => {
     const issuers = filteredIssuers();
@@ -227,7 +251,7 @@ export function Issuers() {
       </div>
 
       <div class="issuers-page--grid">
-        <For each={filteredIssuers().slice(0, 100)}>
+        <For each={paginatedIssuers()}>
           {(issuer) => (
             <A href={`/issuers/${issuer.id}`}>
               <IssuerCard issuer={issuer} />
@@ -236,11 +260,51 @@ export function Issuers() {
         </For>
       </div>
 
-      <Show when={filteredIssuers().length > 100}>
-        <div class="load-more-hint">
-          Showing first 100 of {filteredIssuers().length.toLocaleString()} issuers. Use filters to narrow results.
-        </div>
-      </Show>
+      <div class="pagination">
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === 1}
+          onClick={() => goToPage(1)}
+          title="First page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m11 17-5-5 5-5M18 17l-5-5 5-5" />
+          </svg>
+        </button>
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === 1}
+          onClick={() => goToPage(currentPage() - 1)}
+          title="Previous page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <span class="pagination--info">
+          Page <strong>{currentPage()}</strong> of <strong>{totalPages()}</strong>
+        </span>
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === totalPages()}
+          onClick={() => goToPage(currentPage() + 1)}
+          title="Next page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === totalPages()}
+          onClick={() => goToPage(totalPages())}
+          title="Last page"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m13 17 5-5-5-5M6 17l5-5-5-5" />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }

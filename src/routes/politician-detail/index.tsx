@@ -1,11 +1,12 @@
 import './style.css';
 
 import { useParams } from '@solidjs/router';
-import { Show, createSignal, createMemo, createResource } from 'solid-js';
+import { Show, For, createSignal, createMemo, createResource } from 'solid-js';
 
 import { StatsRow } from '../../components/stats-row';
 import { TradesTable } from '../../components/trades-table';
 import { PoliticianTabs } from '../../components/politician-tabs';
+import { TraitBadge } from '../../components/trait-badge';
 import {
   TradingActivityChart,
   TradeTypeChart,
@@ -17,6 +18,7 @@ import { getPoliticianById } from '../../data/politicians';
 import { getMockTradesForPolitician } from '../../data/mock-trades';
 import { getIssuerPerformance, getSP500Performance } from '../../data/issuers';
 import type { TradeType } from '../../data/types';
+import type { TraitId } from '../../data/traits';
 
 type FilterState = {
   month?: string | null;
@@ -160,6 +162,13 @@ export function PoliticianDetail() {
                     <span class="chamber">{p().chamber}</span>
                     <span class="state">{p().state}</span>
                   </div>
+                  <Show when={p().traits && p().traits!.length > 0}>
+                    <div class="politician-detail--traits">
+                      <For each={p().traits as TraitId[]}>
+                        {(traitId) => <TraitBadge traitId={traitId} size="md" />}
+                      </For>
+                    </div>
+                  </Show>
                 </div>
               </div>
               <div class="politician-detail--info-cards">
