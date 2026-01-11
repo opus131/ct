@@ -1,6 +1,6 @@
 import './style.css';
 
-import { For, createMemo } from 'solid-js';
+import { For, Show, createMemo } from 'solid-js';
 import { A } from '@solidjs/router';
 
 import { getTrades } from '../../data/data-service';
@@ -17,7 +17,6 @@ function formatSize(sizeRange: string): string {
 
 function MarqueeItem(props: {
   ticker: string;
-  issuerLogoUrl: string;
   politicianPhotoUrl: string;
   size: string;
   type: 'buy' | 'sell';
@@ -25,7 +24,6 @@ function MarqueeItem(props: {
   return (
     <A href="/trades" class="marquee-item">
       <img src={props.politicianPhotoUrl} alt="" class="marquee-politician" />
-      <img src={props.issuerLogoUrl} alt="" class="marquee-logo" />
       <span
         class="marquee-ticker"
         classList={{ buy: props.type === 'buy', sell: props.type === 'sell' }}
@@ -44,43 +42,48 @@ function MarqueeItem(props: {
 }
 
 export function TradeMarquee() {
-  // Only include trades where the issuer has a logo
-  const trades = createMemo(() =>
-    getTrades()
-      .filter((t) => t.issuer.logoUrl)
-      .slice(0, 30)
-  );
+  // One trade per politician, most recent first
+  const trades = createMemo(() => {
+    const seen = new Set<string>();
+    return getTrades()
+      .filter((t) => {
+        if (seen.has(t.politician.id)) return false;
+        seen.add(t.politician.id);
+        return true;
+      })
+      .slice(0, 20);
+  });
 
   return (
-    <div class="trade-marquee">
-      <div class="trade-marquee--track">
-        <div class="trade-marquee--content">
-          <For each={trades()}>
-            {(trade) => (
-              <MarqueeItem
-                ticker={trade.issuer.ticker}
-                issuerLogoUrl={trade.issuer.logoUrl!}
-                politicianPhotoUrl={trade.politician.photoUrl}
-                size={trade.sizeRange}
-                type={trade.type}
-              />
-            )}
-          </For>
-        </div>
-        <div class="trade-marquee--content" aria-hidden="true">
-          <For each={trades()}>
-            {(trade) => (
-              <MarqueeItem
-                ticker={trade.issuer.ticker}
-                issuerLogoUrl={trade.issuer.logoUrl!}
-                politicianPhotoUrl={trade.politician.photoUrl}
-                size={trade.sizeRange}
-                type={trade.type}
-              />
-            )}
-          </For>
+    <Show when={trades().length > 0}>
+      <div class="trade-marquee">
+        <div class="trade-marquee--track" style={{ animation: 'marquee-scroll 40s linear infinite' }}>
+          <div class="trade-marquee--content">
+            <For each={trades()}>
+              {(trade) => (
+                <MarqueeItem
+                  ticker={trade.issuer.ticker}
+                  politicianPhotoUrl={trade.politician.photoUrl}
+                  size={trade.sizeRange}
+                  type={trade.type}
+                />
+              )}
+            </For>
+          </div>
+          <div class="trade-marquee--content" aria-hidden="true">
+            <For each={trades()}>
+              {(trade) => (
+                <MarqueeItem
+                  ticker={trade.issuer.ticker}
+                  politicianPhotoUrl={trade.politician.photoUrl}
+                  size={trade.sizeRange}
+                  type={trade.type}
+                />
+              )}
+            </For>
+          </div>
         </div>
       </div>
-    </div>
+    </Show>
   );
 }

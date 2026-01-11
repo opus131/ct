@@ -10,16 +10,13 @@
 
 .trade-marquee--track {
   display: flex;
-  width: max-content;
-  animation: marquee-scroll 60s linear infinite;
-}
-
-.trade-marquee--track:hover {
-  animation-play-state: paused;
+  gap: 0;
+  animation: marquee-scroll 40s linear infinite;
 }
 
 .trade-marquee--content {
   display: flex;
+  flex-shrink: 0;
   gap: var(--s8);
   padding-right: var(--s8);
 }
@@ -37,14 +34,6 @@
   height: 24px;
   border-radius: var(--radius-full);
   object-fit: cover;
-}
-
-.marquee-logo {
-  width: 24px;
-  height: 24px;
-  border-radius: var(--radius-sm);
-  object-fit: contain;
-  background: var(--bg-secondary);
 }
 
 .marquee-ticker {
@@ -73,10 +62,10 @@
 }
 
 @keyframes marquee-scroll {
-  0% {
+  from {
     transform: translateX(0);
   }
-  100% {
+  to {
     transform: translateX(-50%);
   }
 }

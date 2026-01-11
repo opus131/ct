@@ -26,7 +26,16 @@ function formatRelativeDate(dateStr: string): string {
 }
 
 export function Home() {
-  const latestTrades = createMemo(() => getTrades().slice(0, 8));
+  const latestTrades = createMemo(() => {
+    const seen = new Set<string>();
+    return getTrades()
+      .filter((trade) => {
+        if (seen.has(trade.politician.id)) return false;
+        seen.add(trade.politician.id);
+        return true;
+      })
+      .slice(0, 8);
+  });
 
   return (
     <div class="home">
