@@ -8,6 +8,7 @@ type Props = {
   trades: Trade[];
   compact?: boolean;
   showAIInsights?: boolean;
+  hidePolitician?: boolean;
 };
 
 export function TradesTable(props: Props) {
@@ -21,7 +22,7 @@ export function TradesTable(props: Props) {
       <table>
         <thead>
           <tr>
-            <th>Politician</th>
+            {!props.hidePolitician && <th>Politician</th>}
             <th>Traded Issuer</th>
             {!props.compact && <th>Published</th>}
             <th>Traded</th>
@@ -36,18 +37,20 @@ export function TradesTable(props: Props) {
         <tbody>
           {props.trades.map((trade) => (
             <tr>
-              <td class="politician-cell">
-                <img src={trade.politician.photoUrl} alt={trade.politician.name} />
-                <div class="politician-info">
-                  <span class="name">{trade.politician.name}</span>
-                  <span class="meta">
-                    <span classList={{ democrat: trade.politician.party === 'Democrat', republican: trade.politician.party === 'Republican' }}>
-                      {trade.politician.party === 'Democrat' ? 'D' : 'R'}
+              {!props.hidePolitician && (
+                <td class="politician-cell">
+                  <img src={trade.politician.photoUrl} alt={trade.politician.name} />
+                  <div class="politician-info">
+                    <span class="name">{trade.politician.name}</span>
+                    <span class="meta">
+                      <span classList={{ democrat: trade.politician.party === 'Democrat', republican: trade.politician.party === 'Republican' }}>
+                        {trade.politician.party === 'Democrat' ? 'D' : 'R'}
+                      </span>
+                      {' | '}{trade.politician.chamber}{' | '}{trade.politician.state}
                     </span>
-                    {' | '}{trade.politician.chamber}{' | '}{trade.politician.state}
-                  </span>
-                </div>
-              </td>
+                  </div>
+                </td>
+              )}
               <td class="issuer-cell">
                 <div class="issuer-badge">{trade.issuer.ticker?.[0] || trade.issuer.name[0]}</div>
                 <div class="issuer-info">

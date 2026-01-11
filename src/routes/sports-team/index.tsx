@@ -4,7 +4,7 @@ import { A, useParams } from '@solidjs/router';
 import { Show, For, createMemo, createResource } from 'solid-js';
 
 import { getTeamBySlug } from '../../data/politician-bios';
-import { fetchTeamStats, type ESPNTeamStats } from '../../services/espn-api';
+import { fetchTeamStats } from '../../services/espn-api';
 
 export function SportsTeam() {
   const params = useParams<{ slug: string }>();

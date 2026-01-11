@@ -1,6 +1,10 @@
 import { createSignal, Show } from 'solid-js';
 import type { Trade } from '../../data/types';
-import { generateTradeMeme, type MemeResult } from '../../lib/gemini/client';
+import {
+  generateMemeFromPrompt,
+  buildMemePromptForTrade,
+  type MemeResult,
+} from '../../lib/gemini/client';
 import './meme-generator.css';
 
 type Props = {
@@ -12,15 +16,25 @@ export function MemeGenerator(props: Props) {
   const [meme, setMeme] = createSignal<MemeResult | null>(null);
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal<string | null>(null);
+  const [editedPrompt, setEditedPrompt] = createSignal('');
+  const [editedCaption, setEditedCaption] = createSignal('');
 
-  const fetchMeme = async () => {
-    if (meme() || loading()) return;
+  const initializePrompt = () => {
+    const generatedPrompt = buildMemePromptForTrade(props.trade);
+    setEditedPrompt(generatedPrompt.imagePrompt);
+    setEditedCaption(generatedPrompt.caption);
+  };
 
+  const generateMeme = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const result = await generateTradeMeme(props.trade);
+      const result = await generateMemeFromPrompt(
+        props.trade.id,
+        editedPrompt(),
+        editedCaption()
+      );
       setMeme(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate meme');
@@ -29,9 +43,16 @@ export function MemeGenerator(props: Props) {
     }
   };
 
+  const regeneratePrompt = () => {
+    setMeme(null);
+    initializePrompt();
+  };
+
   const openModal = () => {
     setIsOpen(true);
-    fetchMeme();
+    setMeme(null);
+    setError(null);
+    initializePrompt();
   };
 
   const closeModal = () => {
@@ -65,7 +86,7 @@ export function MemeGenerator(props: Props) {
 
       <Show when={isOpen()}>
         <div class="meme-modal-backdrop" onClick={handleBackdropClick}>
-          <div class="meme-modal">
+          <div class="meme-modal meme-modal--wide">
             <div class="meme-modal-header">
               <h3>Trade Meme Generator</h3>
               <button class="close-btn" onClick={closeModal} aria-label="Close">
@@ -76,8 +97,8 @@ export function MemeGenerator(props: Props) {
               <Show when={error()}>
                 <div class="meme-error">
                   <p>{error()}</p>
-                  <button onClick={() => { setError(null); fetchMeme(); }}>
-                    Try Again
+                  <button onClick={() => { setError(null); }}>
+                    Dismiss
                   </button>
                 </div>
               </Show>
@@ -90,6 +111,43 @@ export function MemeGenerator(props: Props) {
                 </div>
               </Show>
 
+              <Show when={!loading() && !meme()}>
+                <div class="meme-prompt-editor">
+                  <div class="prompt-field">
+                    <label for="image-prompt">Image Prompt</label>
+                    <textarea
+                      id="image-prompt"
+                      value={editedPrompt()}
+                      onInput={(e) => setEditedPrompt(e.currentTarget.value)}
+                      rows={8}
+                      placeholder="Describe the image to generate..."
+                    />
+                  </div>
+                  <div class="prompt-field">
+                    <label for="caption">Caption</label>
+                    <input
+                      id="caption"
+                      type="text"
+                      value={editedCaption()}
+                      onInput={(e) => setEditedCaption(e.currentTarget.value)}
+                      placeholder="Meme caption..."
+                    />
+                  </div>
+                  <div class="prompt-actions">
+                    <button class="regenerate-btn" onClick={regeneratePrompt}>
+                      Regenerate Prompt
+                    </button>
+                    <button
+                      class="generate-btn"
+                      onClick={generateMeme}
+                      disabled={!editedPrompt().trim()}
+                    >
+                      Generate Meme
+                    </button>
+                  </div>
+                </div>
+              </Show>
+
               <Show when={meme() && !loading() && !error()}>
                 <div class="meme-result">
                   <img
@@ -99,6 +157,12 @@ export function MemeGenerator(props: Props) {
                   />
                   <p class="meme-caption">{meme()!.caption}</p>
                   <div class="meme-actions">
+                    <button
+                      class="edit-btn"
+                      onClick={() => setMeme(null)}
+                    >
+                      Edit Prompt
+                    </button>
                     <button
                       class="download-btn"
                       onClick={() => {

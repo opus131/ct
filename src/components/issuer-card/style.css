@@ -1,0 +1,161 @@
+.issuer-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: var(--s3) var(--s4);
+  padding: var(--s5);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--glass-border);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.08);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--glass-border-hover);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 50px rgba(99, 102, 241, 0.15);
+  }
+
+  /* Badge */
+  .issuer-card--badge {
+    grid-row: 1 / 2;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 70%, #000));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+
+    .badge-letter {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Sector-based badge colors */
+  &.sector--information-technology .issuer-card--badge {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  }
+
+  &.sector--health-care .issuer-card--badge {
+    background: linear-gradient(135deg, #10b981, #059669);
+  }
+
+  &.sector--financials .issuer-card--badge {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+  }
+
+  &.sector--consumer-discretionary .issuer-card--badge {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+  }
+
+  &.sector--industrials .issuer-card--badge {
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+  }
+
+  &.sector--communication-services .issuer-card--badge {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  }
+
+  &.sector--energy .issuer-card--badge {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+  }
+
+  &.sector--materials .issuer-card--badge {
+    background: linear-gradient(135deg, #78716c, #57534e);
+  }
+
+  &.sector--utilities .issuer-card--badge {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+  }
+
+  &.sector--real-estate .issuer-card--badge {
+    background: linear-gradient(135deg, #a855f7, #9333ea);
+  }
+
+  &.sector--consumer-staples .issuer-card--badge {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+  }
+
+  /* Info section */
+  .issuer-card--info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--s1);
+    min-width: 0;
+  }
+
+  .issuer-card--name {
+    font-size: var(--fs-md);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .issuer-card--meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s2);
+    font-size: var(--fs-xs);
+    flex-wrap: wrap;
+
+    .ticker {
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-weight: 500;
+    }
+
+    .sector-badge {
+      display: inline-flex;
+      padding: 2px var(--s2);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: capitalize;
+    }
+  }
+
+  /* Stats section */
+  .issuer-card--stats {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s2);
+    padding-top: var(--s3);
+    border-top: 1px solid var(--glass-border);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+
+    .stat-value {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+  }
+}

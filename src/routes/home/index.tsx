@@ -1,20 +1,29 @@
 import './style.css';
 
 import { A } from '@solidjs/router';
+import { For, Show, createMemo } from 'solid-js';
 
 import { PredictionMarkets } from '../../components/prediction-markets';
-import { trades } from '../../data/trades';
-import { politicians, stats } from '../../data/politicians';
+import { getTrades, isTradesLoading } from '../../data/data-service';
+import { politicians } from '../../data/politicians';
 import { issuers } from '../../data/issuers';
 
+function formatRelativeDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return 'Today';
+  if (diffDays === 1) return 'Yesterday';
+  if (diffDays < 7) return `${diffDays}d ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)}w ago`;
+  if (diffDays < 365) return `${Math.floor(diffDays / 30)}mo ago`;
+  return `${Math.floor(diffDays / 365)}y ago`;
+}
+
 export function Home() {
-  const statItems = [
-    { value: stats.trades.toLocaleString(), label: 'Trades', icon: 'trades' as const },
-    { value: stats.filings.toLocaleString(), label: 'Filings', icon: 'filings' as const },
-    { value: stats.volume, label: 'Volume', icon: 'volume' as const },
-    { value: stats.politicians, label: 'Politicians', icon: 'politicians' as const },
-    { value: stats.issuers.toLocaleString(), label: 'Issuers', icon: 'issuers' as const },
-  ];
+  const latestTrades = createMemo(() => getTrades().slice(0, 8));
 
   return (
     <div class="home">
@@ -22,33 +31,56 @@ export function Home() {
         <section class="home--latest-trades">
           <div class="section-header">
             <h2>Latest Trades</h2>
-            <div class="section-tabs">
-              <button class="active">Stocks</button>
-              <button>All Assets</button>
-            </div>
             <A href="/trades" class="view-all">View all</A>
           </div>
-          <div class="trades-list">
-            {trades.slice(0, 5).map((trade) => (
-              <div class="trade-item">
-                <span class="trade-type" classList={{ buy: trade.type === 'buy', sell: trade.type === 'sell' }}>
-                  {trade.type.toUpperCase()}
-                </span>
-                <span class="trade-date">Yesterday</span>
-                <div class="trade-issuer">
-                  <span class="issuer-name">{trade.issuer.name}</span>
-                  <span class="issuer-ticker">{trade.issuer.ticker}</span>
-                </div>
-                <div class="trade-politician">
-                  <span class="politician-name">{trade.politician.name}</span>
-                  <span class="politician-meta" classList={{ democrat: trade.politician.party === 'Democrat', republican: trade.politician.party === 'Republican' }}>
-                    {trade.politician.party === 'Democrat' ? 'Democrat' : 'Republican'} | {trade.politician.chamber} | {trade.politician.state}
-                  </span>
-                </div>
-                <span class="trade-size">{trade.sizeRange}</span>
+          <Show
+            when={!isTradesLoading()}
+            fallback={
+              <div class="trades-loading">
+                <span>Loading trades...</span>
               </div>
-            ))}
-          </div>
+            }
+          >
+            <div class="trades-list">
+              <For each={latestTrades()}>
+                {(trade) => (
+                  <A href={`/politicians/${trade.politician.id}`} class="trade-item">
+                    <img
+                      src={trade.politician.photoUrl}
+                      alt={trade.politician.name}
+                      class="trade-politician-photo"
+                    />
+                    <div class="trade-main">
+                      <div class="trade-header">
+                        <span
+                          class="trade-type"
+                          classList={{ buy: trade.type === 'buy', sell: trade.type === 'sell' }}
+                        >
+                          {trade.type.toUpperCase()}
+                        </span>
+                        <span class="trade-issuer-ticker">{trade.issuer.ticker}</span>
+                        <span class="trade-size">{trade.sizeRange}</span>
+                        <span class="trade-date">{formatRelativeDate(trade.publishedAt)}</span>
+                      </div>
+                      <div class="trade-details">
+                        <span class="trade-politician-name">{trade.politician.name}</span>
+                        <span
+                          class="trade-politician-party"
+                          classList={{
+                            democrat: trade.politician.party === 'Democrat',
+                            republican: trade.politician.party === 'Republican',
+                          }}
+                        >
+                          {trade.politician.party[0]} · {trade.politician.chamber} · {trade.politician.state}
+                        </span>
+                      </div>
+                      <div class="trade-issuer-name">{trade.issuer.name}</div>
+                    </div>
+                  </A>
+                )}
+              </For>
+            </div>
+          </Show>
         </section>
 
         <section class="home--featured-politicians">

@@ -160,6 +160,15 @@ export type MemeResult = {
   caption: string;
 };
 
+export type MemePrompt = {
+  imagePrompt: string;
+  caption: string;
+};
+
+export function buildMemePromptForTrade(trade: Trade): MemePrompt {
+  return buildMemePrompt(trade);
+}
+
 export async function generateTradeMeme(trade: Trade): Promise<MemeResult> {
   // Check cache first
   const cached = getCachedMeme(trade.id);
@@ -167,8 +176,16 @@ export async function generateTradeMeme(trade: Trade): Promise<MemeResult> {
     return { imageData: cached.imageData, caption: cached.caption };
   }
 
-  const client = getClient();
   const { imagePrompt, caption } = buildMemePrompt(trade);
+  return generateMemeFromPrompt(trade.id, imagePrompt, caption);
+}
+
+export async function generateMemeFromPrompt(
+  tradeId: string,
+  imagePrompt: string,
+  caption: string
+): Promise<MemeResult> {
+  const client = getClient();
 
   try {
     // Use Gemini 3 Pro Image (Nano Banana Pro) for image generation
@@ -199,7 +216,7 @@ export async function generateTradeMeme(trade: Trade): Promise<MemeResult> {
     }
 
     // Cache the result
-    setCachedMeme(trade.id, imageBytes, caption);
+    setCachedMeme(tradeId, imageBytes, caption);
 
     return { imageData: imageBytes, caption };
   } catch (error) {

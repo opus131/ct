@@ -72,21 +72,40 @@
     }
   }
 
-  .politician-detail--last-traded {
+  .politician-detail--info-cards {
+    display: flex;
+    gap: var(--s6);
+  }
+
+  .politician-detail--info-card {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: var(--s1);
+    gap: 2px;
+    padding-left: var(--s6);
+    border-left: 1px solid var(--border-color);
+
+    &:first-child {
+      border-left: none;
+      padding-left: 0;
+    }
 
     .label {
       font-size: var(--fs-xs);
       color: var(--text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .value {
       font-size: var(--fs-md);
+      font-weight: 500;
       color: var(--text-primary);
+    }
+
+    .sub {
+      font-size: var(--fs-xs);
+      color: var(--text-secondary);
     }
   }
 

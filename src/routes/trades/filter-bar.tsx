@@ -1,7 +1,5 @@
 import { createSignal } from 'solid-js';
 
-import type { Trade } from '../../data/types';
-
 type FilterState = {
   politician: string;
   issuer: string;

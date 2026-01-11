@@ -1,100 +1,33 @@
-import type { Issuer } from './types';
+import { getIssuers } from './data-service';
+export {
+  getIssuers,
+  getIssuerById,
+  getTradesForIssuer,
+  getIssuerPerformance,
+  getSP500Performance,
+  getAllSectors,
+  isIssuersLoading,
+  isPerformanceLoading,
+} from './data-service';
 
-export const issuers: Issuer[] = [
-  {
-    id: '1',
-    name: 'Tesla Inc',
-    ticker: 'TSLA:US',
-    sector: 'Consumer Discretionary',
-    trades: 149,
-    politicians: 42,
-    volume: '8.2M',
-    price: 435.8,
-    priceChange: 266.68,
-    sparkline: [100, 120, 115, 140, 135, 160, 180, 175, 200, 220, 250, 280],
+// Re-export as getter for backwards compatibility
+export const issuers = {
+  get length() {
+    return getIssuers().length;
   },
-  {
-    id: '2',
-    name: 'NVIDIA Corporation',
-    ticker: 'NVDA:US',
-    sector: 'Information Technology',
-    trades: 309,
-    politicians: 68,
-    volume: '32.8M',
-    price: 185.04,
-    priceChange: 1063.12,
-    sparkline: [20, 25, 30, 45, 60, 80, 100, 120, 140, 160, 180, 185],
+  slice(start?: number, end?: number) {
+    return getIssuers().slice(start, end);
   },
-  {
-    id: '3',
-    name: 'FedEx Corp',
-    ticker: 'FDX:US',
-    sector: 'Industrials',
-    trades: 56,
-    politicians: 23,
-    volume: '4.1M',
-    price: 309.01,
-    priceChange: 63.72,
-    sparkline: [200, 210, 205, 220, 240, 235, 250, 265, 280, 290, 300, 309],
+  filter(predicate: Parameters<typeof Array.prototype.filter>[0]) {
+    return getIssuers().filter(predicate);
   },
-  {
-    id: '4',
-    name: 'Meta Platforms Inc',
-    ticker: 'META:US',
-    sector: 'Communication Services',
-    trades: 221,
-    politicians: 54,
-    volume: '8.7M',
-    price: 646.06,
-    priceChange: 385.8,
-    sparkline: [300, 320, 350, 380, 400, 450, 480, 520, 560, 600, 620, 646],
+  map<T>(mapper: (issuer: ReturnType<typeof getIssuers>[number], index: number) => T): T[] {
+    return getIssuers().map(mapper);
   },
-  {
-    id: '5',
-    name: 'Amazon.com Inc',
-    ticker: 'AMZN:US',
-    sector: 'Consumer Discretionary',
-    trades: 243,
-    politicians: 61,
-    volume: '9.8M',
-    price: 246.29,
-    priceChange: 174.05,
-    sparkline: [100, 110, 120, 130, 150, 165, 180, 195, 210, 225, 240, 246],
+  find(predicate: Parameters<typeof Array.prototype.find>[0]) {
+    return getIssuers().find(predicate);
   },
-  {
-    id: '6',
-    name: 'Microsoft Corp',
-    ticker: 'MSFT:US',
-    sector: 'Information Technology',
-    trades: 421,
-    politicians: 89,
-    volume: '209.1M',
-    price: 478.11,
-    priceChange: 45.23,
-    sparkline: [350, 360, 370, 380, 400, 410, 430, 445, 455, 465, 470, 478],
+  [Symbol.iterator]() {
+    return getIssuers()[Symbol.iterator]();
   },
-  {
-    id: '7',
-    name: 'Alphabet Inc',
-    ticker: 'GOOGL:US',
-    sector: 'Communication Services',
-    trades: 387,
-    politicians: 76,
-    volume: '15.4M',
-    price: 325.44,
-    priceChange: 4.16,
-    sparkline: [280, 290, 285, 295, 300, 305, 310, 315, 318, 320, 322, 325],
-  },
-  {
-    id: '8',
-    name: 'Apple Inc',
-    ticker: 'AAPL:US',
-    sector: 'Information Technology',
-    trades: 273,
-    politicians: 65,
-    volume: '27.8M',
-    price: 259.04,
-    priceChange: 6.83,
-    sparkline: [180, 185, 190, 200, 210, 220, 230, 240, 245, 250, 255, 259],
-  },
-];
+};

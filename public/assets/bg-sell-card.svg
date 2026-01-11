@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 330 93">
+  <defs>
+    <path id="e" fill="url(#a)" d="M69.1 26.8 333 24l-.7 62L68.4 89z" opacity=".8" />
+    <path id="f" fill="url(#b)" d="m4 19 302.3-6-1.5 72.4L2.5 91.3z" opacity=".7" />
+    <path id="g" fill="url(#c)" d="m62.7 34.2 260.5-7.9-2 63L60.7 97z" opacity=".7" />
+    <path id="h" fill="url(#d)" d="m27 8.6 263.7-3.2-.8 62.2-263.6 3.1z" opacity=".7" />
+  </defs>
+  <defs>
+    <linearGradient id="a" x1="100%" x2="-5.8%" y1="50%" y2="50%">
+      <stop offset="0%" stop-color="#dd962b" stop-opacity="0" />
+      <stop offset="100%" stop-color="#dd962b" />
+    </linearGradient>
+    <linearGradient id="b" x1="92.3%" x2="-4.4%" y1="35.3%" y2="35.3%">
+      <stop offset="0%" stop-color="#dd962b" stop-opacity="0" />
+      <stop offset="100%" stop-color="#dd962b" />
+    </linearGradient>
+    <linearGradient id="c" x1="89.4%" x2="12.8%" y1="52.6%" y2="47.9%">
+      <stop offset="0%" stop-color="#dd962b" stop-opacity="0" />
+      <stop offset="100%" stop-color="#dd962b" />
+    </linearGradient>
+    <linearGradient id="d" x1="89.4%" x2="12.8%" y1="52.2%" y2="48.3%">
+      <stop offset="0%" stop-color="#dd962b" stop-opacity="0" />
+      <stop offset="100%" stop-color="#dd962b" />
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use xlink:href="#e" opacity=".8" transform="scale(-1 1) rotate(8 229.1 -3544.1)" />
+    <use xlink:href="#f" opacity=".7" transform="scale(-1 1) rotate(15 98.4 -1518)" />
+    <use xlink:href="#g" opacity=".7" transform="scale(-1 1) rotate(25 38.2 -1047.9)" />
+    <use xlink:href="#h" opacity=".7" transform="scale(-1 1) rotate(9 198 -2627.5)" />
+    <use xlink:href="#e" opacity=".8" transform="rotate(8 386.4 -1140.9)" />
+    <use xlink:href="#f" opacity=".7" transform="rotate(15 260.7 -241.2)" />
+    <use xlink:href="#g" opacity=".7" transform="rotate(25 202.8 -289.4)" />
+    <use xlink:href="#h" opacity=".7" transform="rotate(9 356.5 -492.1)" />
+  </g>
+</svg>

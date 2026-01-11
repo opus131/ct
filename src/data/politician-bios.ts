@@ -17,7 +17,7 @@ const ESPN_NCAA = 'https://a.espncdn.com/i/teamlogos/ncaa/500';
 
 export const politicianBios: Record<string, PoliticianBio> = {
   // Nancy Pelosi - Well documented 49ers and Giants fan
-  p000197: {
+  P000197: {
     biography:
       'Nancy Patricia Pelosi is an American politician serving as the U.S. representative for California\'s 11th congressional district. She served as the 52nd Speaker of the House from 2007 to 2011 and again from 2019 to 2023, making her the first woman to hold this position. A member of the Democratic Party, Pelosi is the highest-ranking elected woman in United States history.',
     birthDate: '1940-03-26',
@@ -34,7 +34,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Tommy Tuberville - Former Auburn head football coach
-  t000278: {
+  T000278: {
     biography:
       'Thomas Hawley Tuberville is an American politician and former college football coach serving as the junior United States senator from Alabama since 2021. Before entering politics, Tuberville was the head football coach at Ole Miss, Auburn, Texas Tech, and Cincinnati. At Auburn, he led the Tigers to an undefeated season in 2004 and six consecutive wins over rival Alabama.',
     birthDate: '1954-09-18',
@@ -50,7 +50,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // John Fetterman - Known Steelers fan
-  f000479: {
+  F000479: {
     biography:
       'John Karl Fetterman is an American politician serving as the junior United States senator from Pennsylvania since 2023. A member of the Democratic Party, he served as the 34th lieutenant governor of Pennsylvania from 2019 to 2023 and as mayor of Braddock, Pennsylvania from 2006 to 2019. At 6\'8", he is the tallest sitting U.S. senator.',
     birthDate: '1969-08-15',
@@ -68,7 +68,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Lindsey Graham - South Carolina teams
-  g000359: {
+  G000359: {
     biography:
       'Lindsey Olin Graham is an American politician and attorney serving as the senior United States senator from South Carolina since 2003. A member of the Republican Party, he served in the South Carolina House of Representatives and the U.S. House of Representatives before his Senate election. Graham served in the U.S. Air Force and Air Force Reserve as a judge advocate.',
     birthDate: '1955-07-09',
@@ -86,7 +86,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Dan Crenshaw - Houston area representative
-  c001120: {
+  C001120: {
     biography:
       'Daniel Reed Crenshaw is an American politician and former United States Navy SEAL officer serving as the U.S. representative for Texas\'s 2nd congressional district since 2019. Crenshaw served in the Navy for ten years, deploying five times and earning two Bronze Stars. He lost his right eye to an IED blast in Afghanistan in 2012.',
     birthDate: '1984-03-14',
@@ -103,7 +103,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Virginia Foxx - North Carolina
-  f000450: {
+  F000450: {
     biography:
       'Virginia Ann Foxx is an American politician serving as the U.S. representative for North Carolina\'s 5th congressional district since 2005. A member of the Republican Party, she chairs the House Committee on Education and the Workforce. Before Congress, she served in the North Carolina Senate and on the Watauga County Board of Education.',
     birthDate: '1943-06-29',
@@ -122,7 +122,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Tim Moore - North Carolina
-  m001236: {
+  M001236: {
     biography:
       'Tim Moore is an American politician serving as the U.S. representative for North Carolina\'s 14th congressional district. A member of the Republican Party, he previously served as Speaker of the North Carolina House of Representatives from 2015 to 2024, making him the longest-serving Speaker in North Carolina history.',
     birthDate: '1969-11-21',
@@ -140,7 +140,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Jefferson Shreve - Indiana
-  s001229: {
+  S001229: {
     biography:
       'Jefferson Shreve is an American businessman and politician serving as the U.S. representative for Indiana\'s 6th congressional district since 2025. A member of the Republican Party, Shreve founded Storage Express, a self-storage company with over 100 locations. He previously served on the Indianapolis City-County Council.',
     birthDate: '1966-03-15',
@@ -158,7 +158,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Byron Donalds - Florida
-  d000032: {
+  D000032: {
     biography:
       'Byron Lowell Donalds is an American politician serving as the U.S. representative for Florida\'s 19th congressional district since 2021. A member of the Republican Party, Donalds previously served in the Florida House of Representatives. Before politics, he worked in finance, banking, and insurance.',
     birthDate: '1978-10-28',
@@ -175,7 +175,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Josh Gottheimer - New Jersey
-  g000583: {
+  G000583: {
     biography:
       'Joshua Seth Gottheimer is an American politician serving as the U.S. representative for New Jersey\'s 5th congressional district since 2017. A member of the Democratic Party, Gottheimer is a co-chair of the bipartisan Problem Solvers Caucus. He previously served as a speechwriter for President Bill Clinton.',
     birthDate: '1975-03-08',
@@ -193,7 +193,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Ro Khanna - California (Silicon Valley)
-  k000389: {
+  K000389: {
     biography:
       'Rohit "Ro" Khanna is an American politician and lawyer serving as the U.S. representative for California\'s 17th congressional district since 2017. A member of the Democratic Party, Khanna represents much of Silicon Valley. He previously served as Deputy Assistant Secretary of Commerce under President Obama.',
     birthDate: '1976-09-13',
@@ -211,7 +211,7 @@ export const politicianBios: Record<string, PoliticianBio> = {
   },
 
   // Mark Green - Tennessee
-  g000545: {
+  G000545: {
     biography:
       'Mark Edward Green is an American physician, politician, and retired United States Army officer serving as the U.S. representative for Tennessee\'s 7th congressional district since 2019. A West Point graduate, Green served in the 160th Special Operations Aviation Regiment and was the flight surgeon in the operation that captured Saddam Hussein.',
     birthDate: '1964-11-08',

@@ -86,8 +86,8 @@ function parseEvent(event: GammaEvent): PolymarketEvent {
   };
 }
 
-// Political tag IDs from Polymarket
-const POLITICAL_TAGS = [
+// Political tag IDs from Polymarket (for future use)
+export const POLITICAL_TAGS = [
   '24', // USA Election
   '126', // Trump
   '766', // U.S. Congress

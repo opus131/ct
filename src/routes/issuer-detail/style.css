@@ -1,0 +1,213 @@
+.issuer-detail {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--s6);
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+    margin-bottom: var(--s4);
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  .not-found {
+    text-align: center;
+    padding: var(--s12);
+    color: var(--text-secondary);
+    font-size: var(--fs-lg);
+  }
+
+  .issuer-detail--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--s6);
+    padding: var(--s6);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+  }
+
+  .issuer-detail--profile {
+    display: flex;
+    align-items: center;
+    gap: var(--s5);
+  }
+
+  .issuer-detail--badge {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 70%, #000));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+
+    .badge-letter {
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .issuer-detail--info {
+    h1 {
+      font-size: var(--fs-2xl);
+      font-weight: 600;
+      margin-bottom: var(--s2);
+    }
+  }
+
+  .issuer-detail--meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s3);
+    font-size: var(--fs-sm);
+
+    .ticker {
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .sector, .country {
+      padding: var(--s1) var(--s2);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+    }
+  }
+
+  .issuer-detail--performance {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--s1);
+
+    .label {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .value {
+      font-size: var(--fs-lg);
+      font-weight: 600;
+
+      &.positive {
+        color: var(--color-buy);
+      }
+
+      &.negative {
+        color: var(--color-sell);
+      }
+    }
+  }
+
+  .issuer-detail--charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s5);
+    margin-top: var(--s6);
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .issuer-detail--politicians {
+    margin-top: var(--s6);
+
+    h2 {
+      font-size: var(--fs-lg);
+      font-weight: 600;
+      margin-bottom: var(--s4);
+    }
+
+    .politicians-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--s4);
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .issuer-detail--trades {
+    margin-top: var(--s6);
+
+    .trades-header {
+      display: flex;
+      align-items: center;
+      gap: var(--s4);
+      margin-bottom: var(--s4);
+
+      h2 {
+        font-size: var(--fs-lg);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .filter-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--s2);
+        padding: var(--s1) var(--s3);
+        background: var(--color-accent);
+        color: white;
+        border-radius: var(--radius-full);
+        font-size: var(--fs-xs);
+        font-weight: 500;
+
+        .filter-count {
+          opacity: 0.8;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 18px;
+          height: 18px;
+          margin-left: var(--s1);
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          font-size: 14px;
+          line-height: 1;
+          transition: background var(--transition-fast);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.35);
+          }
+        }
+      }
+    }
+
+    .no-trades {
+      text-align: center;
+      padding: var(--s8);
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+  }
+}

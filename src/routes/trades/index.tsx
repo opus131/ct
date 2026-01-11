@@ -1,13 +1,13 @@
 import './style.css';
 
-import { createSignal, createMemo } from 'solid-js';
+import { createSignal, createMemo, createEffect } from 'solid-js';
 
 import { StatsRow } from '../../components/stats-row';
 import { TradesTable } from '../../components/trades-table';
 import { TradesFilterBar } from './filter-bar';
 import { trades as allTrades } from '../../data/trades';
-import { stats } from '../../data/politicians';
-import type { Trade } from '../../data/types';
+
+const TRADES_PER_PAGE = 20;
 
 type FilterState = {
   politician: string;
@@ -31,6 +31,7 @@ export function Trades() {
     tradeSize: '',
     owner: '',
   });
+  const [currentPage, setCurrentPage] = createSignal(1);
 
   const filteredTrades = createMemo(() => {
     const f = filters();
@@ -62,6 +63,27 @@ export function Trades() {
       return true;
     });
   });
+
+  // Reset to page 1 when filters change
+  createEffect(() => {
+    filters();
+    setCurrentPage(1);
+  });
+
+  const totalPages = createMemo(() => Math.max(1, Math.ceil(filteredTrades().length / TRADES_PER_PAGE)));
+
+  const paginatedTrades = createMemo(() => {
+    const start = (currentPage() - 1) * TRADES_PER_PAGE;
+    return filteredTrades().slice(start, start + TRADES_PER_PAGE);
+  });
+
+  const goToPage = (page: number) => {
+    const total = totalPages();
+    if (page >= 1 && page <= total) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const filteredStats = createMemo(() => {
     const trades = filteredTrades();
@@ -97,7 +119,7 @@ export function Trades() {
 
       <div class="trades-page--content">
         {filteredTrades().length > 0 ? (
-          <TradesTable trades={filteredTrades()} showAIInsights />
+          <TradesTable trades={paginatedTrades()} showAIInsights />
         ) : (
           <div class="no-results">
             <p>No trades match your filters</p>
@@ -106,25 +128,45 @@ export function Trades() {
       </div>
 
       <div class="pagination">
-        <button class="pagination--btn" disabled>
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === 1}
+          onClick={() => goToPage(1)}
+          title="First page"
+        >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="m11 17-5-5 5-5M18 17l-5-5 5-5" />
           </svg>
         </button>
-        <button class="pagination--btn" disabled>
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === 1}
+          onClick={() => goToPage(currentPage() - 1)}
+          title="Previous page"
+        >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="m15 18-6-6 6-6" />
           </svg>
         </button>
         <span class="pagination--info">
-          Page <strong>1</strong> of <strong>{Math.max(1, Math.ceil(filteredTrades().length / 12))}</strong>
+          Page <strong>{currentPage()}</strong> of <strong>{totalPages()}</strong>
         </span>
-        <button class="pagination--btn">
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === totalPages()}
+          onClick={() => goToPage(currentPage() + 1)}
+          title="Next page"
+        >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="m9 18 6-6-6-6" />
           </svg>
         </button>
-        <button class="pagination--btn">
+        <button
+          class="pagination--btn"
+          disabled={currentPage() === totalPages()}
+          onClick={() => goToPage(totalPages())}
+          title="Last page"
+        >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="m13 17 5-5-5-5M6 17l5-5-5-5" />
           </svg>

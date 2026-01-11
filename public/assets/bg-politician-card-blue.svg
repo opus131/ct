@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 330 93">
+  <defs>
+    <path id="e" fill="url(#a)" d="m69.1402 26.7895 263.763-2.8273-.7193 62.0867-263.763 2.8273z"
+      opacity=".7959" />
+    <path id="f" fill="url(#b)" d="m3.9984 18.9324 302.3309-5.9004-1.5143 72.3437L2.4841 91.2762z"
+      opacity=".7061" />
+    <path id="g" fill="url(#c)" d="m62.6726 34.1753 260.4963-7.8576-1.9991 62.9178-260.4962 7.8576z"
+      opacity=".7335" />
+    <path id="h" fill="url(#d)" d="m27.0766 8.6116 263.6582-3.1697-.8064 62.1133-263.6582 3.1697z"
+      opacity=".6857" />
+  </defs>
+  <defs>
+    <linearGradient id="a" x1="100%" x2="-5.7616%" y1="50%" y2="50%">
+      <stop offset="0%" stop-color="#186CEA" stop-opacity="0" />
+      <stop offset="100%" stop-color="#186CEA" />
+    </linearGradient>
+    <linearGradient id="b" x1="92.25%" x2="-4.3675%" y1="35.3384%" y2="35.3384%">
+      <stop offset="0%" stop-color="#186CEA" stop-opacity="0" />
+      <stop offset="100%" stop-color="#186CEA" />
+    </linearGradient>
+    <linearGradient id="c" x1="89.3534%" x2="12.8091%" y1="52.5751%" y2="47.9159%">
+      <stop offset="0%" stop-color="#186CEA" stop-opacity="0" />
+      <stop offset="100%" stop-color="#186CEA" />
+    </linearGradient>
+    <linearGradient id="d" x1="89.3534%" x2="12.8091%" y1="52.1585%" y2="48.2531%">
+      <stop offset="0%" stop-color="#186CEA" stop-opacity="0" />
+      <stop offset="100%" stop-color="#186CEA" />
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use xlink:href="#e" opacity=".7959" transform="scale(-1 1) rotate(8 229.113 -3544.14)" />
+    <use xlink:href="#f" opacity=".7061" transform="scale(-1 1) rotate(15 98.3672 -1518.07)" />
+    <use xlink:href="#g" opacity=".7335" transform="scale(-1 1) rotate(25 38.2088 -1047.903)" />
+    <use xlink:href="#h" opacity=".6857" transform="scale(-1 1) rotate(9 198.021 -2627.5155)" />
+    <use xlink:href="#e" opacity=".7959" transform="rotate(8 386.3875 -1140.8781)" />
+    <use xlink:href="#f" opacity=".7061" transform="rotate(15 260.6704 -241.2333)" />
+    <use xlink:href="#g" opacity=".7335" transform="rotate(25 202.8258 -289.354)" />
+    <use xlink:href="#h" opacity=".6857" transform="rotate(9 356.4913 -492.123)" />
+  </g>
+</svg>

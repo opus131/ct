@@ -1,0 +1,71 @@
+<svg width="264" height="83" xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient x1="49.9999936%" y1="100%" x2="49.9999936%" y2="-3.30997803%" id="b">
+      <stop stop-color="#186CEA" offset="0%" />
+      <stop stop-color="#0249B3" offset="100%" />
+    </linearGradient>
+    <linearGradient x1="49.9999936%" y1="99.1308582%" x2="49.9999936%" y2="-3.27316731%" id="f">
+      <stop stop-color="#9F9F9F" offset="0%" />
+      <stop stop-color="#E0E0E0" offset="99.9643687%" />
+    </linearGradient>
+    <linearGradient x1="49.9999936%" y1="99.0579213%" x2="49.9999936%" y2="-3.23667939%" id="i">
+      <stop stop-color="#E0E0E0" offset=".03563133%" />
+      <stop stop-color="#9F9F9F" offset="100%" />
+    </linearGradient>
+    <linearGradient x1="49.9999936%" y1="99.1308582%" x2="49.9999936%" y2="-3.27316731%" id="l">
+      <stop stop-color="#9F9F9F" offset="0%" />
+      <stop stop-color="#E0E0E0" offset="99.9643687%" />
+    </linearGradient>
+    <path
+      d="M185.955297 33.8128512C103.793221 102.072099 47.8139041 155.175868.37780996 82.7247273v84.3157187H334.04582V19.2920579C324.759178 13.1179835 301.471607.08040496 270.42368.08040496c-24.376672 0-53.535142 8.03308264-84.468383 33.73244624"
+      id="a" />
+    <path
+      d="M185.955297 33.8128512C103.793221 102.072099 47.8139041 155.175868.37780996 82.7247273v84.3157187H334.04582V19.2920579C324.759178 13.1179835 301.471607.08040496 270.42368.08040496c-24.376672 0-53.535142 8.03308264-84.468383 33.73244624"
+      id="e" />
+    <path
+      d="M.37780996 48.6900496v79.4549254H334.04582V25.6406281C308.508876 7.23416529 285.350224.08268595 263.482388.08040496 208.514903.07470248 161.65142 45.2406198 105.29714 70.3737273 39.062459 99.9125702 9.30819629 63.5929091.37780996 48.6900496Z"
+      id="h" />
+    <path
+      d="M.86929561 146.643022v28.617893H334.537306V116.11537c-7.073058-8.514372-27.300735-27.0457194-69.37266-27.0457194-17.5826 0-38.979495 3.236157-64.826739 11.7932974C95.8207874 135.463882 65.831461 178.852337.86929561 146.643022Z"
+      id="k" />
+    <filter x="-3.6%" y="-7.2%" width="107.2%" height="114.4%" filterUnits="objectBoundingBox"
+      id="d">
+      <feOffset in="SourceAlpha" result="shadowOffsetOuter1" />
+      <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3386589 0" in="shadowBlurOuter1" />
+    </filter>
+    <filter x="-3.6%" y="-9.4%" width="107.2%" height="118.7%" filterUnits="objectBoundingBox"
+      id="g">
+      <feOffset in="SourceAlpha" result="shadowOffsetOuter1" />
+      <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3386589 0" in="shadowBlurOuter1" />
+    </filter>
+    <filter x="-3.6%" y="-13.9%" width="107.2%" height="127.8%" filterUnits="objectBoundingBox"
+      id="j">
+      <feOffset in="SourceAlpha" result="shadowOffsetOuter1" />
+      <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3386589 0" in="shadowBlurOuter1" />
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g transform="rotate(-155 147.11047086 65.1581774)">
+      <mask id="c" fill="#fff">
+        <use xlink:href="#a" />
+      </mask>
+      <use fill="url(#b)" xlink:href="#a" />
+      <g mask="url(#c)">
+        <use fill="#000" filter="url(#d)" xlink:href="#e" />
+        <use fill="url(#f)" xlink:href="#e" />
+      </g>
+    </g>
+    <g transform="rotate(-155 152.29372876 41.7780119)">
+      <use fill="#000" filter="url(#g)" xlink:href="#h" />
+      <use fill="url(#i)" xlink:href="#h" />
+    </g>
+    <g transform="rotate(-155 147.31679555 65.3904618)">
+      <use fill="#000" filter="url(#j)" xlink:href="#k" />
+      <use fill="url(#l)" xlink:href="#k" />
+    </g>
+  </g>
+</svg>

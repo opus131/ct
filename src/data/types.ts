@@ -10,18 +10,31 @@ export type SportsTeam = {
   logoUrl: string;
 };
 
+export type SocialLinks = {
+  website?: string;
+  twitter?: string;
+  facebook?: string;
+  youtube?: string;
+};
+
 export type Politician = {
   id: string;
   name: string;
   party: Party;
   chamber: Chamber;
   state: string;
+  district?: string;
   photoUrl: string;
   trades: number;
   filings: number;
   issuers: number;
   volume: string;
   lastTraded: string;
+  firstTraded?: string;
+  yearsActive?: string;
+  dob?: string;
+  gender?: 'M' | 'F';
+  socialLinks?: SocialLinks;
   traits?: string[];
   biography?: string;
   birthDate?: string;
@@ -37,12 +50,25 @@ export type Issuer = {
   ticker: string;
   logoUrl?: string;
   sector?: string;
+  country?: string;
   trades: number;
   politicians: number;
   volume: string;
+  dateFirstTraded?: string;
+  dateLastTraded?: string;
   price?: number;
   priceChange?: number;
   sparkline?: number[];
+};
+
+export type IssuerPerformance = {
+  issuerId: string;
+  eodPrices: [string, number][];
+  mcap?: number;
+  trailing30?: number;
+  trailing90?: number;
+  trailing365?: number;
+  ytd?: number;
 };
 
 export type Trade = {
@@ -60,6 +86,7 @@ export type Trade = {
     name: string;
     ticker: string;
     logoUrl?: string;
+    sector?: string;
   };
   publishedAt: string;
   tradedAt: string;

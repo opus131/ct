@@ -7,7 +7,8 @@ import { StatsRow } from '../../components/stats-row';
 import { FilterBar } from '../../components/filter-bar';
 import { PoliticianCard } from '../../components/politician-card';
 import { TraitBadge } from '../../components/trait-badge';
-import { politicians, stats } from '../../data/politicians';
+import { getPoliticians, stats } from '../../data/politicians';
+import type { Politician } from '../../data/types';
 import { traitCategories, getTraitsByCategory, type TraitId } from '../../data/traits';
 
 export function Politicians() {
@@ -23,9 +24,10 @@ export function Politicians() {
   const clearTraits = () => setSelectedTraits([]);
 
   const filteredPoliticians = createMemo(() => {
+    const allPoliticians = getPoliticians();
     const selected = selectedTraits();
-    if (selected.length === 0) return politicians;
-    return politicians.filter((p) => {
+    if (selected.length === 0) return allPoliticians;
+    return allPoliticians.filter((p: Politician) => {
       const pTraits = (p.traits || []) as TraitId[];
       return selected.some((t) => pTraits.includes(t));
     });
