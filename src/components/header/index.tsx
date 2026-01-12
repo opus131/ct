@@ -50,6 +50,7 @@ export function Header() {
             <A href="/politicians" classList={{ active: isActive('/politicians') }}>Politicians</A>
             <A href="/issuers" classList={{ active: isActive('/issuers') }}>Issuers</A>
             <A href="/committees" classList={{ active: isActive('/committees') }}>Committees</A>
+            <A href="/states" classList={{ active: isActive('/states') }}>States</A>
             <A href="/insights" classList={{ active: isActive('/insights') }}>Insights</A>
             <A href="/buzz" classList={{ active: isActive('/buzz') }}>Buzz</A>
           </nav>
@@ -86,6 +87,9 @@ export function Header() {
         </A>
         <A href="/committees" classList={{ active: isActive('/committees') }} onClick={closeMenu}>
           Committees
+        </A>
+        <A href="/states" classList={{ active: isActive('/states') }} onClick={closeMenu}>
+          States
         </A>
         <A href="/insights" classList={{ active: isActive('/insights') }} onClick={closeMenu}>
           Insights

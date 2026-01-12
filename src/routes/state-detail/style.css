@@ -1,0 +1,215 @@
+.state-detail {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--s6);
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s2);
+    margin-bottom: var(--s4);
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  .not-found {
+    text-align: center;
+    padding: var(--s12);
+    color: var(--text-secondary);
+    font-size: var(--fs-lg);
+  }
+
+  .state-detail--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--s6);
+    padding: var(--s6);
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+
+    &.party--democrat {
+      background: linear-gradient(135deg, rgba(24, 108, 234, 0.1) 0%, var(--bg-card) 50%);
+      border-color: rgba(24, 108, 234, 0.3);
+    }
+
+    &.party--republican {
+      background: linear-gradient(135deg, rgba(194, 49, 49, 0.1) 0%, var(--bg-card) 50%);
+      border-color: rgba(194, 49, 49, 0.3);
+    }
+
+    &.party--independent {
+      background: linear-gradient(135deg, rgba(107, 114, 128, 0.1) 0%, var(--bg-card) 50%);
+      border-color: rgba(107, 114, 128, 0.3);
+    }
+  }
+
+  .state-detail--profile {
+    display: flex;
+    align-items: center;
+    gap: var(--s5);
+  }
+
+  .state-detail--outline {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    padding: var(--s3);
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.8;
+    }
+  }
+
+  .state-detail--info {
+    h1 {
+      font-size: var(--fs-2xl);
+      font-weight: 600;
+      margin-bottom: var(--s2);
+    }
+  }
+
+  .state-detail--meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s4);
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+
+    .capital {
+      padding: var(--s1) var(--s3);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+    }
+
+    .senate-composition {
+      display: flex;
+      align-items: center;
+      gap: var(--s2);
+      padding: var(--s1) var(--s3);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+
+      .senate-label {
+        color: var(--text-muted);
+      }
+
+      .senate-value {
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .state-detail--charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s5);
+    margin-top: var(--s6);
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .state-detail--politicians {
+    margin-top: var(--s6);
+
+    h2 {
+      font-size: var(--fs-lg);
+      font-weight: 600;
+      margin-bottom: var(--s4);
+    }
+
+    .politicians-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--s4);
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .state-detail--trades {
+    margin-top: var(--s6);
+
+    .trades-header {
+      display: flex;
+      align-items: center;
+      gap: var(--s4);
+      margin-bottom: var(--s4);
+
+      h2 {
+        font-size: var(--fs-lg);
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .filter-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--s2);
+        padding: var(--s1) var(--s3);
+        background: var(--color-accent);
+        color: white;
+        border-radius: var(--radius-full);
+        font-size: var(--fs-xs);
+        font-weight: 500;
+
+        .filter-count {
+          opacity: 0.8;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 18px;
+          height: 18px;
+          margin-left: var(--s1);
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          font-size: 14px;
+          line-height: 1;
+          transition: background var(--transition-fast);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.35);
+          }
+        }
+      }
+    }
+
+    .no-trades {
+      text-align: center;
+      padding: var(--s8);
+      color: var(--text-secondary);
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+  }
+}

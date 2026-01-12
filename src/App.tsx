@@ -13,6 +13,8 @@ import { Issuers } from './routes/issuers';
 import { IssuerDetail } from './routes/issuer-detail';
 import { Committees } from './routes/committees';
 import { CommitteeDetail } from './routes/committee-detail';
+import { States } from './routes/states';
+import { StateDetail } from './routes/state-detail';
 import { SportsTeam } from './routes/sports-team';
 
 function Layout(props: ParentProps) {
@@ -36,6 +38,8 @@ export default function App() {
       <Route path="/issuers/:id" component={IssuerDetail} />
       <Route path="/committees" component={Committees} />
       <Route path="/committees/:id" component={CommitteeDetail} />
+      <Route path="/states" component={States} />
+      <Route path="/states/:id" component={StateDetail} />
       <Route path="/sports/:slug" component={SportsTeam} />
     </Router>
   );
