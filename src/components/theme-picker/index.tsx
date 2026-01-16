@@ -8,10 +8,10 @@ export function ThemePicker() {
     <button
       class="theme-picker"
       onClick={toggleTheme}
-      aria-label={`Switch to ${theme() === 'light' ? 'dark' : 'light'} mode`}
-      title={`Switch to ${theme() === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >
-      <div class="theme-picker--track" data-theme={theme()}>
+      <div class="theme-picker--track" data-theme={theme}>
         <div class="theme-picker--thumb">
           {/* Sun icon */}
           <svg
