@@ -2,6 +2,7 @@ import './style.css';
 
 import { A, useLocation } from '@solidjs/router';
 import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { ThemePicker } from '../theme-picker';
 
 export function Header() {
   const location = useLocation();
@@ -55,17 +56,20 @@ export function Header() {
             <A href="/buzz" classList={{ active: isActive('/buzz') }}>Buzz</A>
           </nav>
 
-          <button
-            class="header--hamburger"
-            classList={{ open: isMenuOpen() }}
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen()}
-          >
-            <span class="hamburger-line" />
-            <span class="hamburger-line" />
-            <span class="hamburger-line" />
-          </button>
+          <div class="header--actions">
+            <ThemePicker />
+            <button
+              class="header--hamburger"
+              classList={{ open: isMenuOpen() }}
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen()}
+            >
+              <span class="hamburger-line" />
+              <span class="hamburger-line" />
+              <span class="hamburger-line" />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -76,6 +80,10 @@ export function Header() {
       />
 
       <nav class="header--drawer" classList={{ open: isMenuOpen() }}>
+        <div class="header--drawer-theme">
+          <span class="header--drawer-theme-label">Theme</span>
+          <ThemePicker />
+        </div>
         <A href="/trades" classList={{ active: isActive('/trades') }} onClick={closeMenu}>
           Trades
         </A>
