@@ -58,6 +58,12 @@
     }
   }
 
+  .header--actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s4);
+  }
+
   .header--hamburger {
     display: none;
     flex-direction: column;
@@ -149,5 +155,20 @@
     &.active {
       color: var(--text-primary);
     }
+  }
+
+  .header--drawer-theme {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--s3) 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--s2);
+  }
+
+  .header--drawer-theme-label {
+    color: var(--text-secondary);
+    font-size: var(--fs-lg);
+    font-weight: 500;
   }
 }

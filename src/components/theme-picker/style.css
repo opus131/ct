@@ -1,0 +1,105 @@
+.theme-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.theme-picker:hover {
+  transform: scale(1.05);
+}
+
+.theme-picker:active {
+  transform: scale(0.95);
+}
+
+.theme-picker--track {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  transition: background var(--transition-base), border-color var(--transition-base);
+}
+
+.theme-picker--track:hover {
+  border-color: var(--glass-border-hover);
+}
+
+.theme-picker--thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-picker--track[data-theme="light"] .theme-picker--thumb {
+  transform: translateX(28px);
+}
+
+.theme-picker--icon {
+  position: absolute;
+  color: var(--bg-body);
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+
+.theme-picker--icon-sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+.theme-picker--icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-picker--track[data-theme="light"] .theme-picker--icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-picker--track[data-theme="light"] .theme-picker--icon-moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+/* Add a subtle glow effect on hover */
+.theme-picker:hover .theme-picker--thumb {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-picker--track {
+    width: 52px;
+    height: 26px;
+  }
+
+  .theme-picker--thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  .theme-picker--track[data-theme="light"] .theme-picker--thumb {
+    transform: translateX(26px);
+  }
+
+  .theme-picker--icon {
+    width: 14px;
+    height: 14px;
+  }
+}

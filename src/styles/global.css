@@ -4,7 +4,8 @@
   box-sizing: border-box;
 }
 
-:root {
+:root,
+:root[data-theme="dark"] {
   /* Background colors - very dark like Raycast */
   --bg-body: #0a0a0c;
   --bg-primary: #0f0f12;
@@ -42,6 +43,46 @@
   --gradient-democrat: rgba(59, 130, 246, 0.25);
   --gradient-republican-bright: rgba(239, 68, 68, 0.5);
   --gradient-republican: rgba(239, 68, 68, 0.25);
+}
+
+:root[data-theme="light"] {
+  /* Background colors - soft, warm neutrals */
+  --bg-body: #fafafa;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-card: #ffffff;
+  --bg-hover: #f8f8f8;
+
+  /* Text colors */
+  --text-primary: #0a0a0a;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+
+  /* Accent colors - slightly adjusted for light mode */
+  --color-buy: #16a34a;
+  --color-sell: #dc2626;
+  --color-democrat: #2563eb;
+  --color-republican: #dc2626;
+  --color-accent: #4f46e5;
+
+  /* Border colors */
+  --border-color: #e5e5e5;
+  --border-light: #f0f0f0;
+
+  /* Frosted glass effects for light mode */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-solid: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-border-hover: rgba(0, 0, 0, 0.12);
+  --glass-blur: 16px;
+
+  /* Party gradient colors (soft beams for light mode) */
+  --glow-democrat: #2563eb;
+  --glow-republican: #dc2626;
+  --gradient-democrat-bright: rgba(37, 99, 235, 0.15);
+  --gradient-democrat: rgba(37, 99, 235, 0.08);
+  --gradient-republican-bright: rgba(220, 38, 38, 0.15);
+  --gradient-republican: rgba(220, 38, 38, 0.08);
 
   /* Spacing scale */
   --s1: 4px;

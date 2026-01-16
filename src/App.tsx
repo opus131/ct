@@ -3,6 +3,7 @@ import './styles/global.css';
 import { Router, Route } from '@solidjs/router';
 import type { ParentProps } from 'solid-js';
 
+import { ThemeProvider } from './context/theme';
 import { Header } from './components/header';
 import { Home } from './routes/home';
 import { Trades } from './routes/trades';
@@ -28,19 +29,21 @@ function Layout(props: ParentProps) {
 
 export default function App() {
   return (
-    <Router root={Layout}>
-      <Route path="/" component={Home} />
-      <Route path="/trades" component={Trades} />
-      <Route path="/politicians" component={Politicians} />
-      <Route path="/politicians/:id" component={PoliticianDetail} />
-      <Route path="/politicians/:id/bio" component={PoliticianBio} />
-      <Route path="/issuers" component={Issuers} />
-      <Route path="/issuers/:id" component={IssuerDetail} />
-      <Route path="/committees" component={Committees} />
-      <Route path="/committees/:id" component={CommitteeDetail} />
-      <Route path="/states" component={States} />
-      <Route path="/states/:id" component={StateDetail} />
-      <Route path="/sports/:slug" component={SportsTeam} />
-    </Router>
+    <ThemeProvider>
+      <Router root={Layout}>
+        <Route path="/" component={Home} />
+        <Route path="/trades" component={Trades} />
+        <Route path="/politicians" component={Politicians} />
+        <Route path="/politicians/:id" component={PoliticianDetail} />
+        <Route path="/politicians/:id/bio" component={PoliticianBio} />
+        <Route path="/issuers" component={Issuers} />
+        <Route path="/issuers/:id" component={IssuerDetail} />
+        <Route path="/committees" component={Committees} />
+        <Route path="/committees/:id" component={CommitteeDetail} />
+        <Route path="/states" component={States} />
+        <Route path="/states/:id" component={StateDetail} />
+        <Route path="/sports/:slug" component={SportsTeam} />
+      </Router>
+    </ThemeProvider>
   );
 }
